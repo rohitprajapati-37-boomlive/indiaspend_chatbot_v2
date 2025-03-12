@@ -1,0 +1,165 @@
+:root {
+  --white: #fff;
+  --black: #e9e9e9;
+  --primary: #4d4d4d;
+  --icon-color: #212121;
+  --primary-dark-bg: #003366;
+  --secondary-dark-bg: #f3f3ee;
+  --therd-dark-bg: #ffffff;
+  --tw-shadow-color: rgba(60, 64, 67, 0.3);
+}
+
+[data-theme=dark] {
+  --white: #c3c3c3;
+  --black: #303030;
+  --primary: #c3c3c3;
+  --icon-color: #989898;
+  --primary-dark-bg: #171717;
+  --secondary-dark-bg: #212121;
+  --therd-dark-bg: #383737;
+  --tw-shadow-color: rgba(60, 64, 67, 0.3);
+}
+
+.grecaptcha-badge {
+  display: none !important;
+}
+
+:root {
+  --sidebar-width2: 24%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  height: 100%;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  scroll-behavior: smooth;
+}
+
+.mainContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.mainContainer .sidebar_abh {
+  background-color: var(--primary-dark-bg);
+  width: var(--sidebar-width2);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 275px;
+}
+.mainContainer .sidebar_abh .listbox {
+  color: var(--white);
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.mainContainer .sidebar_abh .sidebar_block {
+  margin-top: 2rem;
+}
+.mainContainer .sidebar_abh .sidebar_block h5 {
+  font-size: 0.84rem;
+}
+.mainContainer .sidebar_abh .sidebar_block:first-of-type {
+  margin-top: 1rem;
+}
+.mainContainer .sidebar_abh span {
+  color: var(--white);
+}
+.mainContainer .bodyContainer {
+  background-color: var(--secondary-dark-bg);
+  width: calc(100% - var(--sidebar-width2));
+  width: -webkit-fill-available;
+  height: 100vh;
+}
+.mainContainer .bodyContainer .workingContainer {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0 0.6rem 0;
+  height: 100vh;
+}
+.mainContainer .bodyContainer .workingContainer .head_c {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem 1rem 1rem;
+}
+.mainContainer .bodyContainer .workingContainer .head_c .clear-hst-ic-txt button {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  justify-content: flex-end;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: -webkit-fill-available;
+  gap: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c {
+  flex-grow: 1;
+  width: 100%;
+  overflow-y: auto;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c {
+  width: 100%;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content {
+  width: 100%;
+  background-color: var(--primary-dark-bg);
+  color: var(--white);
+  border-radius: 0.75rem;
+  padding: 0.8rem;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container {
+  background-color: var(--secondary-dark-bg);
+  border: none;
+  border-radius: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container input {
+  width: -webkit-fill-available;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  background-color: var(--secondary-dark-bg);
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: var(--secondary-dark-bg);
+  color: var(--icon-color);
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container button svg {
+  font-size: 1.4rem;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .disclaimer_div {
+  font-size: 0.65rem;
+  width: 95%;
+  margin: auto;
+  margin-top: 0.2rem;
+  color: var(--primary);
+}/*# sourceMappingURL=abhApp.css.map */

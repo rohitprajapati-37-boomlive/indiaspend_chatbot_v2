@@ -1,0 +1,98 @@
+// Function to fetch iframe links from API
+export const fetchIframes = async (urls) => {
+  try {
+    const response = await fetch(
+      "https://microservices-pink.vercel.app/api/scrapCharts",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ urls }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const data = await response.json();
+    return data.results?.flatMap((item) => item.iframes) || [];
+  } catch (error) {
+    console.error("Error fetching iframes:", error);
+    return [];
+  }
+};
+
+// Function to extract domain from URL
+export const getDomain = (url) => {
+  try {
+    return new URL(url).hostname; // Extracts domain (e.g., "indiaspend.com")
+  } catch {
+    return url; // Fallback if URL parsing fails
+  }
+};
+
+export const fetchMetadataFromApi = async (urls) => {
+  try {
+    // Convert the URLs array into a JSON string
+    const urlParam = JSON.stringify(urls);
+
+    // Make the API call
+    const response = await fetch(
+      `https://toolbox.boomlive.in/api_project/mediator_vue.php?get_metadata_from_arr=${encodeURIComponent(
+        urlParam
+      )}`
+    );
+
+    if (response.ok) {
+      // Parse and return the JSON response
+      return await response.json();
+    } else {
+      throw new Error(`Failed to fetch metadata: ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error("Error fetching metadata from API:", error);
+    throw error; // Re-throw the error for the calling code to handle
+  }
+};
+
+// Function to fetch metadata (title) of a given URL using API
+export const fetchMetaTitle = async (url) => {
+  try {
+    console.log("Fetching metadata for URL:", url);
+
+    // Call the API with a single URL wrapped in an array
+    const metadata = await fetchMetadataFromApi([url]);
+    console.log("metadata", metadata);
+
+    // Extract title from the response
+    const title = metadata?.final_response?.[0]?.title || "No Title Found";
+    console.log("title", title);
+
+    return title;
+  } catch (error) {
+    return url;
+  }
+};
+// function addUtmToUrl(url) {
+export const addUtmToUrl = (url) => {
+  try {
+    let urlObj = new URL(url);
+
+    // 🔹 Remove trailing `/` only if it's at the end of the pathname (not in query)
+    urlObj.pathname = urlObj.pathname.replace(/\/$/, "");
+
+    // 🔹 Use URLSearchParams to modify query parameters safely
+    let params = new URLSearchParams(urlObj.search);
+    params.set("utm_source", "ask_indiaspend"); // Overwrite if exists
+
+    // 🔹 Set updated search params
+    urlObj.search = params.toString();
+
+    return urlObj.toString();
+  } catch (error) {
+    console.error("Invalid URL:", url);
+    return url;
+  }
+};

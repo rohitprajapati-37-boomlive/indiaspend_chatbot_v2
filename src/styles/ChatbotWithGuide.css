@@ -1,0 +1,11 @@
+.react-joyride__tooltip {
+  background-color: var(--primary) !important;
+  border-radius: 5px !important;
+  box-sizing: border-box !important;
+  color: var(--black) !important;
+  font-size: 10px !important;
+  max-width: 100%;
+  padding: 15px;
+  position: relative;
+  width: 380px;
+}
