@@ -42,6 +42,8 @@ function TrendingQuestions({
   setQuestionString,
   isClearHistory,
   setIsClearHistory,
+  isStartNewThread,
+  setIsStartNewThread,
 }) {
   const [questions, setQuestions] = useState([]);
   const [questionsSet, setQuestionsSet] = useState([]);
@@ -166,6 +168,7 @@ function TrendingQuestions({
     }
   }
   const handleQuestionClick = async (question) => {
+    setIsStartNewThread(false);
     setIsSubmit(false);
     setSelectedQuestion(question);
     setLoading(true);
@@ -503,7 +506,7 @@ function TrendingQuestions({
   return (
     <>
       <main className="trending-questions">
-        {history.length > 0 && (
+        {history.length > 0 && !isStartNewThread && (
           <div className="history-section">
             <div className="history-list">
               <ul className="history-items">
@@ -671,6 +674,40 @@ function TrendingQuestions({
             </div> */}
           </div>
         )}
+        {isStartNewThread && (
+          <div className="questions-grid">
+            <div className="tren-q-tit ">
+              <h2 className="text-2xl font-bold">Trending Questions</h2>
+            </div>
+            <div className="refresh-section-container">
+              <div className="refresh-section" onClick={handleRefresh}>
+                <div className="refreshingrk">
+                  <MdOutlineRefresh />
+                </div>
+                <div className="ref-txt-rk">
+                  <h4>Refresh</h4>
+                </div>
+              </div>
+            </div>
+            {Array.isArray(questions) && questions.length > 0 ? (
+              questions.map((q, index) => (
+                <div
+                  key={index}
+                  className="question-card"
+                  onClick={() => handleQuestionClick(q)}
+                >
+                  <div className="question-icon">
+                    {getRandomIcon(questionIcons)}
+                  </div>
+                  <h4 className="question-text text-lg font-semibold">{q}</h4>
+                </div>
+              ))
+            ) : (
+              <p>No questions found.</p>
+            )}
+          </div>
+        )}
+
         {/* {history.length === 0 && (
           <div className="questions-grid">
             <div className="tren-q-tit ">
@@ -715,7 +752,7 @@ function TrendingQuestions({
               <div className="skeleton-item"></div>
             </div>
           </div>
-        ) : history.length === 0 ? (
+        ) : history.length === 0 && !isStartNewThread ? (
           <div className="questions-grid">
             <div className="tren-q-tit ">
               <h2 className="text-2xl font-bold">Trending Questions</h2>

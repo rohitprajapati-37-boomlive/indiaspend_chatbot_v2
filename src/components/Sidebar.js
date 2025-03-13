@@ -31,6 +31,7 @@ function Sidebar({
   setShowTrendingQuestions,
   isCollapsed,
   toggleSidebar,
+  startNewThread,
 }) {
   // const [isCollapsed, setIsCollapsed] = useState(false);
   const [previousQuestions, setPreviousQuestions] = useState([]);
@@ -51,7 +52,10 @@ function Sidebar({
       JSON.parse(localStorage.getItem("questionHistory")) || [];
     localStorage.removeItem("questionHistory"); // Chat history delete karega
     setPreviousQuestions(storedHistory.slice(0, 5)); // Purani chats dikha dega
-    window.location.reload(); // Page reload karega taki naye chat shuru ho
+    // window.location.reload(); // Page reload karega taki naye chat shuru ho
+    setShowFAQ(false);
+    setShowFeedback(false);
+    startNewThread();
   };
 
   return (

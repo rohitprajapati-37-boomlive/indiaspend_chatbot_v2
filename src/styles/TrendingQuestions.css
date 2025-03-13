@@ -69,6 +69,7 @@
 .history-section {
   background-color: var(--secondary-dark-bg);
   color: var(--white);
+  width: 100%;
   /* padding: 10px 15px; */
   border-radius: 10px;
   /* max-height: 360px; */

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"; // ✅ Import axios
 
 import logo from "../src/assets/ask_indiaspend.svg";
-import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
+import { GoSun, GoMoon } from "react-icons/go";
+
+// import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { MdSend } from "react-icons/md";
 import { MdAutoDelete } from "react-icons/md";
 
@@ -99,11 +101,7 @@ const DarkModeToggle = () => {
       onClick={toggleTheme}
       aria-label="Toggle Theme"
     >
-      {theme === "light" ? (
-        <MdOutlineDarkMode size={25} />
-      ) : (
-        <MdLightMode size={25} />
-      )}
+      {theme === "light" ? <GoSun /> : <GoMoon />}
     </button>
   );
 };
@@ -111,7 +109,7 @@ const DarkModeToggle = () => {
 function App() {
   const [showFAQ, setShowFAQ] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [question, setQuestion] = useState("");
   const [questionString, setQuestionString] = useState("");
 
@@ -124,6 +122,8 @@ function App() {
   const [sources, setSources] = useState([]);
   const [error, setError] = useState(null);
   const [previousQuestions, setPreviousQuestions] = useState([]);
+
+  const [isStartNewThread, setIsStartNewThread] = useState(false);
 
   const handleShowFAQ = () => {
     setShowFAQ(true);
@@ -162,197 +162,10 @@ function App() {
     setIsClearHistory(true);
   };
 
-  // const handleQuestionClick = async (question) => {
-  //   // console.log(question);
-  //   setSelectedQuestion(question);
-  //   setLoading(true);
-  //   setAnswer(""); // Clear previous answer
-  //   setSources([]); // Clear previous sources
-  //   setError(null);
-  //   let fetchedAnswer = ""; // Initialize useRef for storing answer data
-  //   let isFirstMessage = true; // Flag to check if it's the first message
-  //   let fetchedSources = [];
-  //   let iframeInfo = null;
-  //   let articleInfo;
-  //   const urlsToRemove = ["https://www.indiaspend.com/the-gender-skew/"];
-  //   const utmParams = "?utm_source=ask_indiaspend";
+  const startNewThread = () => {
+    setIsStartNewThread(true);
+  };
 
-  //   try {
-  //     const eventSource = new EventSource(
-  //       `https://i4g0k440wkc4o4skgocgwg88.vps.boomlive.in/stream_query?question=${encodeURIComponent(
-  //         question
-  //       )}&thread_id=default`
-  //     );
-
-  //     eventSource.onmessage = async (event) => {
-  //       // Ignore unwanted initial messages
-  //       if (
-  //         isFirstMessage &&
-  //         (event.data === "Yes" ||
-  //           event.data === "No" ||
-  //           event.data === "." ||
-  //           event.data === "")
-  //       ) {
-  //         return;
-  //       }
-
-  //       isFirstMessage = false; // Mark first message as processed
-
-  //       // Handle the `[end]` signal
-  //       if (event.data === "[end]") {
-  //         // console.log("End of stream received.");
-  //         eventSource.close(); // Close the stream
-
-  //         if (fetchedAnswer.includes("Sources:")) {
-  //           // Find the index of "Sources:"
-  //           const sourcesIndex = fetchedAnswer.indexOf("Sources:");
-
-  //           // Trim the fetchedAnswer and save the sources part
-  //           const sourcesData = fetchedAnswer
-  //             .slice(sourcesIndex + "Sources:".length)
-  //             .trim();
-  //           // console.log("souresData", sourcesData);
-
-  //           // Regular expression to find URLs (assuming sources are URLs)
-  //           const urlRegex = /(https?:\/\/[^\s]+)/g;
-
-  //           // Extract valid URLs using regex
-  //           fetchedSources = sourcesData.match(urlRegex);
-  //           // console.log("fetchedSources", fetchedSources);
-
-  //           // Remove the sources part from fetchedAnswer
-  //           fetchedAnswer = fetchedAnswer.slice(0, sourcesIndex).trim();
-  //           // console.log(fetchedAnswer);
-  //         }
-  //         return;
-  //       }
-
-  //       try {
-  //         const data = JSON.parse(event.data); // Parse JSON data if it's structured
-  //         if (data.sources) {
-  //           // console.log("Sources received:", data.sources);
-  //           fetchedSources = data.sources;
-  //           console.log(fetchedAnswer);
-  //           // Modify "Read more" link in fetchedAnswer
-  //           fetchedAnswer = fetchedAnswer.replace(
-  //             /\[Read more\]\((https?:\/\/[^\s)]+)\)/g,
-  //             (match, url) => `[Read more](${addUtmToUrl(url)})`
-  //           );
-
-  //           console.log("modifiedAnswer", fetchedAnswer);
-  //           const urlRegex = /(https?:\/\/[^\s)]+)/g;
-  //           const extractedUrls = fetchedAnswer.match(urlRegex);
-  //           console.log("extractedUrls", extractedUrls);
-  //           // calling charts scraping function here
-
-  //           const Iframes = await fetchIframes(extractedUrls);
-  //           console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-  //           console.log(Iframes);
-  //           console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-  //           if (Iframes.length > 0) {
-  //             iframeInfo = {
-  //               iframeLink: Iframes[0],
-  //               iframeSource: extractedUrls[0],
-  //             };
-  //           }
-  //           // setIframeInfo(iframeInfo);
-  //           if (extractedUrls) {
-  //             urlsToRemove.push(...extractedUrls);
-  //           }
-  //           //
-  //           console.log(urlsToRemove, "urlsToRemove", extractedUrls);
-
-  //           console.log(fetchedSources);
-
-  //           const updatedSources = fetchedSources.map((url) => {
-  //             try {
-  //               let urlObj = new URL(url);
-
-  //               // 🔹 Remove trailing `/` only if it's at the end of the pathname
-  //               urlObj.pathname = urlObj.pathname.replace(/\/$/, "");
-
-  //               // 🔹 Use URLSearchParams to modify query parameters safely
-  //               let params = new URLSearchParams(urlObj.search);
-  //               params.set("utm_source", "ask_indiaspend"); // Overwrite if exists
-
-  //               // 🔹 Set updated search params
-  //               urlObj.search = params.toString();
-
-  //               return urlObj.toString();
-  //             } catch (error) {
-  //               console.error("Invalid URL:", url);
-  //               return url;
-  //             }
-  //           });
-
-  //           console.log(updatedSources);
-
-  //           // Apply filter
-  //           fetchedSources = updatedSources.filter((url) => {
-  //             const shouldRemove = urlsToRemove.includes(url);
-  //             if (shouldRemove) {
-  //               console.log("Removing:", url); // Debugging ke liye
-  //             }
-  //             return !shouldRemove;
-  //           });
-  //           articleInfo = await fetchMetadataFromApi(fetchedSources);
-  //           // console.log(articleInfo);
-  //           setSources(data.sources); // Update sources state
-  //         } else {
-  //           let fetchedEventData = event.data.replace(/\\n/g, "  \n"); // Removes literal '\n'
-
-  //           fetchedAnswer += fetchedEventData; // Append chunk to the answer
-  //         }
-  //       } catch (err) {
-  //         // Count the number of newlines and log it
-
-  //         let fetchedEventData = event.data.replace(/\\n/g, "  \n"); // Removes literal '\n'
-  //         fetchedAnswer += fetchedEventData; // Assume plain text if parsing fails
-  //       }
-
-  //       setAnswer(fetchedAnswer); // Update the answer state
-
-  //       const updatedHistory = [
-  //         {
-  //           question,
-  //           answer: fetchedAnswer,
-  //           sources: articleInfo,
-  //           timestamp: new Date().toISOString(),
-  //           iframeInfo: iframeInfo,
-  //         },
-  //         ...history,
-  //       ];
-  //       setHistory(updatedHistory);
-
-  //       localStorage.setItem("questionHistory", JSON.stringify(updatedHistory));
-  //       setLoading(false);
-  //     };
-
-  //     eventSource.onerror = () => {
-  //       setError("Error streaming the answer");
-  //       eventSource.close();
-  //     };
-
-  //     eventSource.onclose = () => {
-  //       const updatedHistory = [
-  //         {
-  //           question,
-  //           answer: fetchedAnswer,
-  //           sources: [], // No sources available in this case
-  //           timestamp: new Date().toISOString(),
-  //         },
-  //         ...history,
-  //       ];
-  //       setHistory(updatedHistory);
-
-  //       localStorage.setItem("questionHistory", JSON.stringify(updatedHistory));
-  //       setLoading(false);
-  //     };
-  //   } catch (error) {
-  //     setError("Failed to stream the answer");
-  //     setLoading(false);
-  //   }
-  // };
   // ✅ useEffect to check thread ID on component mount
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("threadIDData"));
@@ -376,6 +189,7 @@ function App() {
           setShowFeedback={setShowFeedback}
           isCollapsed={isCollapsed}
           toggleSidebar={toggleSidebar}
+          startNewThread={startNewThread}
         />
         {/* </div> */}
         {/* </div> */}
@@ -406,7 +220,29 @@ function App() {
                     setQuestionString={setQuestionString}
                     isClearHistory={isClearHistory}
                     setIsClearHistory={setIsClearHistory}
+                    isStartNewThread={isStartNewThread}
+                    setIsStartNewThread={setIsStartNewThread}
                   />
+                )}
+
+                {/* FAQ Modal */}
+                {showFAQ && (
+                  <div className="faq-content modal">
+                    <button className="close-btn" onClick={closeModals}>
+                      <MdClose size={24} />
+                    </button>
+                    <FAQ />
+                  </div>
+                )}
+
+                {/* Feedback Modal */}
+                {showFeedback && (
+                  <div className="faq-content modal">
+                    <button className="close-btn" onClick={closeModals}>
+                      <MdClose size={24} />
+                    </button>
+                    <FeedbackForm />
+                  </div>
                 )}
               </div>
 
