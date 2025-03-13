@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
+// import { GoInfo } from "react-icons/fa";
+// import { GoGlobe } from "react-icons/fa6";
+// import { GoComment  } from "react-icons/bs";
+// import { GoCrossReference } from "react-icons/ri";
+// import { GoMail   } from "react-icons/md";
+// import { GoSidebarCollapse } from "react-icons/tb";
+
+// import { GoCrossReference } from "react-icons/fi";
+import { BsGenderTrans } from "react-icons/bs";
 import {
-  FaInfoCircle,
-  FaQuestionCircle,
-  FaTransgenderAlt,
-  FaLink,
-  FaBook,
-} from "react-icons/fa";
-import { FaEarthAsia } from "react-icons/fa6";
-import { BsChatDotsFill } from "react-icons/bs";
-import { RiChatAiFill } from "react-icons/ri";
-import { MdMail } from "react-icons/md";
-import {
-  TbLayoutSidebarLeftCollapseFilled,
-  TbLayoutSidebarRightCollapseFilled,
-} from "react-icons/tb";
+  GoQuestion,
+  GoSidebarCollapse,
+  GoSidebarExpand,
+  GoCrossReference,
+  GoComment,
+  GoMail,
+  GoInfo,
+  GoRepo,
+  GoGlobe,
+  GoLink,
+} from "react-icons/go";
 
 import logo from "../assets/ask_indiaspend.svg";
 
@@ -65,11 +71,7 @@ function Sidebar({
         <div className="sidebar_block">
           {/* Sidebar Toggle Button */}
           <p className="toggle-button sidebar-icon" onClick={toggleSidebar}>
-            {isCollapsed ? (
-              <TbLayoutSidebarLeftCollapseFilled size={25} />
-            ) : (
-              <TbLayoutSidebarRightCollapseFilled size={25} />
-            )}
+            {isCollapsed ? <GoSidebarCollapse /> : <GoSidebarExpand />}
             <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
               Collapse
             </span>
@@ -77,7 +79,7 @@ function Sidebar({
 
           <p className="new-thread-button" onClick={handleNewThread}>
             <span className="sidebar-icon">
-              <RiChatAiFill />
+              <GoCrossReference />
             </span>
             <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
               Start new thread
@@ -93,32 +95,32 @@ function Sidebar({
               {
                 text: "IndiaSpend",
                 link: "https://www.indiaspend.com",
-                icon: <FaLink />,
+                icon: <GoLink />,
               },
               {
                 text: "Earthcheck India",
                 link: "https://www.indiaspend.com/earthcheckindia",
-                icon: <FaEarthAsia />,
+                icon: <GoGlobe />,
               },
               {
                 text: "Education Check",
                 link: "https://www.indiaspend.com/education-check",
-                icon: <FaBook />,
+                icon: <GoRepo />,
               },
               {
                 text: "GenderCheck",
                 link: "https://www.indiaspend.com/gendercheck",
-                icon: <FaTransgenderAlt />,
+                icon: <BsGenderTrans />,
               },
               {
                 text: "Newsletters",
                 link: "https://www.indiaspend.com/subscribe",
-                icon: <MdMail />,
+                icon: <GoMail />,
               },
               {
                 text: "About",
                 link: "https://www.indiaspend.com/about-us",
-                icon: <FaInfoCircle />,
+                icon: <GoInfo />,
               },
             ].map((item, index) => (
               <p
@@ -146,7 +148,7 @@ function Sidebar({
               }}
             >
               <span className="sidebar-icon">
-                <FaQuestionCircle />
+                <GoQuestion />
               </span>
               <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                 FAQ
@@ -162,7 +164,7 @@ function Sidebar({
               }}
             >
               <span className="sidebar-icon Feedback-ur-text">
-                <BsChatDotsFill />
+                <GoComment />
               </span>
               <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                 Feedback
@@ -174,7 +176,7 @@ function Sidebar({
         {/* ✅ Start New Thread Button */}
         {/* <p className="new-thread-button" onClick={handleNewThread}>
           <span className="sidebar-icon">
-            <RiChatAiFill />
+            <GoCrossReference />
           </span>
           <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
             Start new thread

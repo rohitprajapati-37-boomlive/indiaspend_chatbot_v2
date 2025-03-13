@@ -57,6 +57,10 @@ body {
   height: 100vh;
   max-width: 275px;
 }
+.mainContainer .sidebar_abh .logoDiv img {
+  width: 1.6rem;
+  height: auto;
+}
 .mainContainer .sidebar_abh .listbox {
   color: var(--white);
   flex-grow: 1;
@@ -64,6 +68,15 @@ body {
 }
 .mainContainer .sidebar_abh .sidebar_block {
   margin-top: 2rem;
+}
+.mainContainer .sidebar_abh .sidebar_block .ttlquicklink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.36rem;
+}
+.mainContainer .sidebar_abh .sidebar_block svg {
+  width: 1.36rem;
+  height: 1.36rem;
 }
 .mainContainer .sidebar_abh .sidebar_block h5 {
   font-size: 0.84rem;
