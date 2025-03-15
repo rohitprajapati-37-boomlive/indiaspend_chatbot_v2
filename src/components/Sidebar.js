@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 
 // import { GoCrossReference } from "react-icons/fi";
 
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 
 import { BsGenderTrans } from "react-icons/bs";
 import {
@@ -22,6 +22,7 @@ import {
   GoRepo,
   GoGlobe,
   GoLink,
+  GoXCircle,
 } from "react-icons/go";
 
 import logo from "../assets/ask_indiaspend.svg";
@@ -76,14 +77,17 @@ function Sidebar({
       )}
 
       {/* Sidebar */}
-      <div className={`sidebar_abh ${isMobileMenuOpen ? "open" : ""}`}>
+      <div
+        className={`sidebar_abh ${isMobileMenuOpen ? "open" : ""}`}
+        style={{ width: !isCollapsed ? "4rem" : "" }}
+      >
         {/* ✖ Close Button (Right Side) */}
         {isMobileMenuOpen && (
           <div
             className="mobile-menu-icon right"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <FiX />
+            <GoXCircle />
           </div>
         )}
 
@@ -106,11 +110,16 @@ function Sidebar({
               <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                 Collapse
               </span>
+
+              <span className={`tooltip_text ${isCollapsed ? "" : "hidden"}`}>
+                Collapse
+              </span>
             </p>
 
             <p className="new-thread-button" onClick={handleNewThread}>
               <span className="sidebar-icon">
-                <GoCrossReference />
+                <GoCrossReference />{" "}
+                <span className="tooltip_text">Start New Thread</span>
               </span>
               <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                 Start new thread
@@ -162,7 +171,10 @@ function Sidebar({
                     setIsMobileMenuOpen(false);
                   }}
                 >
-                  <span className="sidebar-icon">{item.icon}</span>
+                  <span className="sidebar-icon">
+                    {item.icon}
+                    <span className="tooltip_text">{item.text}</span>
+                  </span>
                   <span
                     className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}
                   >
@@ -175,7 +187,7 @@ function Sidebar({
 
           <div className="sidebar_block">
             <div className={`ttlquicklink ${isCollapsed ? "" : "hidden"}`}>
-              {isCollapsed && <h5>Title 2</h5>}
+              {isCollapsed && <h5>Know More</h5>}
               <p
                 className="faq-button"
                 onClick={() => {
@@ -184,8 +196,8 @@ function Sidebar({
                   setIsMobileMenuOpen(false);
                 }}
               >
-                <span className="sidebar-icon">
-                  <GoQuestion />
+                <span className="sidebar-icon ">
+                  <GoQuestion /> <span className="tooltip_text"> FAQ</span>
                 </span>
                 <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                   FAQ
@@ -202,7 +214,7 @@ function Sidebar({
                 }}
               >
                 <span className="sidebar-icon Feedback-ur-text">
-                  <GoComment />
+                  <GoComment /> <span className="tooltip_text">Feedback</span>
                 </span>
                 <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                   Feedback

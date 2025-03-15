@@ -327,8 +327,6 @@ li.history-card .answer-content p.answer-preview p a {
   border-radius: 10px;
   background-color: var(--black);
   margin: 5% 0 ;
-
-
 }
 
 .skeleton-loader {
@@ -404,6 +402,89 @@ li.history-card .answer-content p.answer-preview p a {
     background-position: 200% 0;
   }
 }
+
+/* URL Sources Section  */
+
+.loading-sour {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: var(--black);
+  box-shadow: 1px 1px 20px 2px var(--tw-shadow);
+  border-radius: 10px;
+}
+
+.skeleton-card-sour {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  background: var(--therd-dark-bg);
+  border-radius: 8px;
+  border: 0.2px solid var(--border-color);
+  animation: shimmer 1.5s infinite;
+  flex-direction: row;
+}
+
+.skeleton-card-sour:nth-child(1) {
+  animation-delay: 0s;
+}
+.skeleton-card-sour:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.skeleton-card-sour:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.skeleton-card-sour:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.skeleton-image-sour {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background: linear-gradient(-90deg, var(--secondary-dark-bg) 0%, var(--black) 50%, var(--secondary-dark-bg) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.skeleton-text-sour {
+  height: 15px;
+  border-radius: 4px;
+  background: linear-gradient(-90deg, var(--secondary-dark-bg) 0%, var(--black) 50%, var(--secondary-dark-bg) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text-container .skeleton-text-sour:first-child {
+  width: 80%;
+}
+
+.skeleton-text-container .skeleton-text-sour:last-child {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 
 .clear-hst-ic-txt {
   text-align: right;

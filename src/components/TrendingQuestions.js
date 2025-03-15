@@ -593,11 +593,36 @@ function TrendingQuestions({
                             {/* Show loading until all three are loaded */}
                             {sourceLoading && index === array.length - 1 ? (
                               <div className="loading-sour">
-                                <div className="skeleton-card">
-                                  <div className="skeleton-loader"></div>
-                                  <div className="skeleton-item"></div>
-                                  <div className="skeleton-item"></div>
-                                  <div className="skeleton-item"></div>
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
+                                  </div>
+                                </div>
+
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
+                                  </div>
+                                </div>
+
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
+                                  </div>
+                                </div>
+
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
+                                  </div>
                                 </div>
                               </div>
                             ) : (

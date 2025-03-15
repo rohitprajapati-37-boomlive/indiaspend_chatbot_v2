@@ -88,9 +88,13 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    min-height: 240px;
     max-width: 275px;
 
     .logoDiv {
+      margin-bottom: 1rem;
+      margin-left: 0.22rem;
+
       img {
         width: 1.6rem;
         height: auto;
@@ -102,6 +106,7 @@ body {
       color: var(--white);
       flex-grow: 1;
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .sidebar_block {
@@ -123,16 +128,53 @@ body {
         // color: ;
         font-size: 0.84rem;
       }
+
+      .sidebar-text.hidden {
+        display: none;
+      }
+
+      .sidebar-icon {
+        position: relative;
+      }
+
+      // .tooltip_text {
+      //   visibility: hidden;
+      //   width: max-content;
+      //   background-color: #000;
+      //   color: #fff;
+      //   text-align: center;
+      //   border-radius: 6px;
+      //   padding: 0.1rem 0.4rem;
+      //   font-size: 0.76rem;
+      //   left: 1.8rem;
+      //   opacity: 0;
+      //   cursor: default;
+      //   // pointer-events: none;
+      //   position: absolute;
+      //   z-index: 100;
+      //   transition: opacity 0s ease-out, visibility 0s ease-out;
+      //   white-space: nowrap;
+      // }
+
+      // .sidebar-icon:hover .tooltip_text {
+      //   opacity: 1;
+      //   visibility: visible;
+      // }
     }
 
     .sidebar_block:first-of-type {
       margin-top: 1rem;
+      margin-top: 0;
+
+      gap: 0.36rem;
+      display: flex;
+      flex-direction: column;
     }
 
     span {
       color: var(--white);
-      // display: flex;
-      // align-items: center;
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -170,8 +212,18 @@ body {
             display: flex;
             align-items: center;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: normal;
             justify-content: flex-end;
+          }
+        }
+
+        button.theme-toggle {
+          width: 1.4rem;
+          height: 1.4rem;
+
+          svg {
+            width: 100%;
+            height: 100%;
           }
         }
       }
@@ -268,5 +320,79 @@ body {
         }
       }
     }
+  }
+}
+
+.tooltip_text {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 100%; /* tooltip_text button ke upar dikhane ke liye */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.cler-hst-ic,
+.dark-mode-container {
+  position: relative; /* tooltip_text ka position sahi rakhne ke liye */
+  display: inline-block;
+}
+
+.cler-hst-ic:hover .tooltip_text,
+.sidebar-icon:hover .tooltip_text,
+.dark-mode-container:hover .tooltip_text {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 992px) {
+  .questions-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .mainContainer {
+    .bodyContainer {
+      .workingContainer {
+        .thin_width {
+          .foot_c {
+            .disclaimer_div {
+              width: 100%;
+              font-size: 0.44rem;
+            }
+          }
+        }
+
+        .head_c {
+          padding: 0 0.5rem 0.5rem 0.5rem;
+        }
+      }
+    }
+  }
+
+  .footer-content {
+    text-align: center;
+
+    h2 {
+      font-size: 1rem;
+    }
+
+    p {
+      margin: 0 0 0.4rem 0;
+      font-size: 0.7rem;
+    }
+  }
+
+  .sources-section ul {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
   }
 }

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"; // ✅ Import axios
 
 import logo from "../src/assets/ask_indiaspend.svg";
-import { GoSun, GoMoon } from "react-icons/go";
+import { GoSun, GoMoon, GoTrash } from "react-icons/go";
 
 // import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { MdSend } from "react-icons/md";
-import { MdAutoDelete } from "react-icons/md";
+// import { MdAutoDelete } from "react-icons/md";
 
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -15,7 +15,8 @@ import FAQ from "./components/FAQ";
 import FeedbackForm from "./components/FeedbackForm";
 import { MdClose } from "react-icons/md";
 // import "./App.css";
-import "./abhApp.css";
+// import "./abhApp.css";
+import "./abhApp.scss";
 import { Colors } from "chart.js";
 import {
   fetchIframes,
@@ -202,11 +203,17 @@ function App() {
                   onClick={handleClearHistory}
                   className="clear-history-btn"
                 >
-                  <div className="cler-hst-ic">{/* <MdAutoDelete /> */}</div>
-                  <div className="cler-hst-txt">Clear History</div>
+                  <div className="cler-hst-ic">
+                    <GoTrash />
+                    <span className="tooltip_text">Clear History</span>
+                  </div>
+                  {/* <div className="cler-hst-txt">Clear History</div> */}
                 </button>
               </div>
-              <DarkModeToggle />
+              <div className="dark-mode-container">
+                <DarkModeToggle />
+                <span className="tooltip_text">Dark</span>
+              </div>
             </div>
 
             <div class="thin_width">
@@ -246,54 +253,56 @@ function App() {
                 )}
               </div>
 
-              <div className="foot_c wc_item">
-                <div className="footer-content">
-                  <div>
-                    <h2>Got a Question? Get Expert Answers!</h2>
-                    <p>
-                      Ask a data-driven question, and our experts will get back
-                      to you.
-                    </p>
+              {!showFAQ && !showFeedback && (
+                <div className="foot_c wc_item">
+                  <div className="footer-content">
+                    <div>
+                      <h2>Got a Question? Get Expert Answers!</h2>
+                      <p>
+                        Ask a data-driven question, and our experts will get
+                        back to you.
+                      </p>
+                    </div>
+
+                    <div className="input-container">
+                      <input
+                        type="text"
+                        placeholder="Ask something here..."
+                        value={questionString}
+                        onChange={(e) => setQuestionString(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        disabled={submitLoading}
+                      />{" "}
+                      <button
+                        type="submit"
+                        className="send-btn"
+                        onClick={handleSubmit}
+                        disabled={submitLoading || questionString === ""}
+                      >
+                        <MdSend />
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="input-container">
-                    <input
-                      type="text"
-                      placeholder="Ask something here..."
-                      value={questionString}
-                      onChange={(e) => setQuestionString(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      disabled={submitLoading}
-                    />{" "}
-                    <button
-                      type="submit"
-                      className="send-btn"
-                      onClick={handleSubmit}
-                      disabled={submitLoading || questionString === ""}
-                    >
-                      <MdSend />
-                    </button>
-                  </div>
-                </div>
-
-                <div class="disclaimer_div">
-                  <span>
-                    <strong>Disclaimer: </strong>
+                  <div class="disclaimer_div">
                     <span>
-                      Ask IndiaSpend is an AI-powered tool that derives
-                      information from IndiaSpend’s articles and interprets data
-                      based on our reporting. While we strive to provide
-                      accurate and contextual insights, some responses may not
-                      be current. For more information, please refer to our
-                      stories linked in the responses. For any concerns or
-                      clarifications, please reach out to us at{" "}
-                      <a href="mailto:respond@indiaspend.org">
-                        respond@indiaspend.org
-                      </a>
+                      <strong>Disclaimer: </strong>
+                      <span>
+                        Ask IndiaSpend is an AI-powered tool that derives
+                        information from IndiaSpend’s articles and interprets
+                        data based on our reporting. While we strive to provide
+                        accurate and contextual insights, some responses may not
+                        be current. For more information, please refer to our
+                        stories linked in the responses. For any concerns or
+                        clarifications, please reach out to us at{" "}
+                        <a href="mailto:respond@indiaspend.org">
+                          respond@indiaspend.org
+                        </a>
+                      </span>
                     </span>
-                  </span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* <div className="footerContainer wc_item">Disclaimer</div> */}

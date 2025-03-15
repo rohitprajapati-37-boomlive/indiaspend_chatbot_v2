@@ -195,6 +195,7 @@ display: none;
   z-index: 1100;
   background: transparent;
   color: var(--icon-color);
+  font-size: 1.25rem;
 }
 
 /* ✖ Close Button (Right Side) */
@@ -207,6 +208,7 @@ display: none;
   background: transparent;
   color: var(--black);
   text-align: end;
+  font-size: 1.5rem;
 }
 
 
@@ -233,4 +235,12 @@ display: none;
   .sidebar_abh.open {
     transform: translateX(0);
   }
+
+
+  .sidebar_block:first-of-type {
+    margin-top: 2rem;
+  }
+  p.toggle-button.sidebar-icon {
+    display: none;
+}
 }
