@@ -376,6 +376,9 @@ body {
         }
       }
     }
+    .input-container {
+      width: 95%;
+    }
   }
 
   .footer-content {
@@ -387,11 +390,16 @@ body {
 
     p {
       margin: 0 0 0.4rem 0;
-      font-size: 0.7rem;
+      font-size: 0.6rem;
     }
   }
 
   .sources-section ul {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .loading-sour {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
   }
