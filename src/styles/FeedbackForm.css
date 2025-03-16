@@ -1,5 +1,6 @@
 .feedback-form {
   margin: 0 auto;
+  width: 95%;
 }
 
 .feedback-form input[type="text"], input[type="email"], textarea {

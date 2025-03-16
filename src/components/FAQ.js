@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { FaChevronDown } from "react-icons/fa";
+import { GoChevronDown } from "react-icons/go";
 import "../styles/Faq.css";
 
 function FAQ() {
@@ -54,7 +54,7 @@ function FAQ() {
               <span>
                 {index + 1}. {faq.question}
               </span>
-              <FaChevronDown
+              <GoChevronDown
                 className={`transition-transform ${
                   openIndex === index ? "rotate-180" : ""
                 }`}

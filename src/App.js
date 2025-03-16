@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"; // ✅ Import axios
-
 import logo from "../src/assets/ask_indiaspend.svg";
 import { GoSun, GoMoon, GoTrash } from "react-icons/go";
 

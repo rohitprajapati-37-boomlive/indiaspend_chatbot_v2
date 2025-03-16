@@ -435,7 +435,7 @@ function TrendingQuestions({
     );
 
     // // Show shimmer effect if loading
-    // if (!sourceLoading) {
+    // if (1==1) {
     //   return (
     //     <div className="loading-sour">
     //       <div className="skeleton-card">

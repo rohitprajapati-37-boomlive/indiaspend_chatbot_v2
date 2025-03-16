@@ -131,7 +131,7 @@ li.history-card {
 
 li.history-card .answer-content p.answer-preview p a {
   text-decoration: none;
-  color: var(--primary-dark-bg);
+  color: var(--primary);
   font-weight: 700;
 }
 
@@ -286,7 +286,7 @@ li.history-card .answer-content p.answer-preview p a {
 
 .refresh-section {
   display: flex;
-  color: var(--primary-dark-bg);
+  color: var(--primary);
   /* padding: 0 15px; */
   margin: 0;
   cursor: pointer;
@@ -330,7 +330,7 @@ li.history-card .answer-content p.answer-preview p a {
 }
 
 .skeleton-loader {
-  width: 95%;
+  width: 100%;
   max-width: 120px;
   height: 15px;
   background: linear-gradient(-90deg,
@@ -389,7 +389,7 @@ li.history-card .answer-content p.answer-preview p a {
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   height: 20px;
-  width: 95%;
+  width: 100%;
   border-radius: 4px;
 }
 

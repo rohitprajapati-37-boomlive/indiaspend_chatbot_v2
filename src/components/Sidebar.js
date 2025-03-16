@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 // import { GoInfo } from "react-icons/fa";
 // import { GoGlobe } from "react-icons/fa6";
 // import { GoComment  } from "react-icons/bs";
@@ -106,21 +107,29 @@ function Sidebar({
           {/* <div className="sidebar-content"> */}
           <div className="sidebar_block">
             {/* Sidebar Toggle Button */}
-            <p className="toggle-button sidebar-icon" onClick={toggleSidebar}>
+            <p
+              data-tooltip-id="nav1"
+              className="toggle-button sidebar-icon"
+              onClick={toggleSidebar}
+            >
               {isCollapsed ? <GoSidebarCollapse /> : <GoSidebarExpand />}
               <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                 Collapse
               </span>
 
-              <span className={`tooltip_text ${isCollapsed ? "" : "hidden"}`}>
+              {/* <span className={`tooltip_text ${!isCollapsed ? "" : "hidden"}`}>
                 Collapse
-              </span>
+              </span> */}
             </p>
 
-            <p className="new-thread-button" onClick={handleNewThread}>
+            <p
+              data-tooltip-id="nav2"
+              className="new-thread-button"
+              onClick={handleNewThread}
+            >
               <span className="sidebar-icon">
                 <GoCrossReference />{" "}
-                <span className="tooltip_text">Start New Thread</span>
+                {/* <span className="tooltip_text">Start New Thread</span> */}
               </span>
               <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                 Start new thread
@@ -137,36 +146,43 @@ function Sidebar({
                   text: "IndiaSpend",
                   link: "https://www.indiaspend.com",
                   icon: <GoLink />,
+                  tooltip: "nav3",
                 },
                 {
                   text: "Earthcheck India",
                   link: "https://www.indiaspend.com/earthcheckindia",
                   icon: <GoGlobe />,
+                  tooltip: "nav4",
                 },
                 {
                   text: "Education Check",
                   link: "https://www.indiaspend.com/education-check",
                   icon: <GoRepo />,
+                  tooltip: "nav5",
                 },
                 {
-                  text: "GenderCheck",
+                  text: "Gender Check",
                   link: "https://www.indiaspend.com/gendercheck",
                   icon: <BsGenderTrans />,
+                  tooltip: "nav6",
                 },
                 {
                   text: "Newsletters",
                   link: "https://www.indiaspend.com/subscribe",
                   icon: <GoMail />,
+                  tooltip: "nav7",
                 },
                 {
                   text: "About",
                   link: "https://www.indiaspend.com/about-us",
                   icon: <GoInfo />,
+                  tooltip: "nav8",
                 },
               ].map((item, index) => (
                 <p
                   key={index}
                   className="faq-button"
+                  data-tooltip-id={item.tooltip}
                   onClick={() => {
                     window.open(item.link);
                     setIsMobileMenuOpen(false);
@@ -174,7 +190,7 @@ function Sidebar({
                 >
                   <span className="sidebar-icon">
                     {item.icon}
-                    <span className="tooltip_text">{item.text}</span>
+                    {/* <span className="tooltip_text">{item.text}</span> */}
                   </span>
                   <span
                     className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}
@@ -190,6 +206,7 @@ function Sidebar({
             <div className={`ttlquicklink ${isCollapsed ? "" : "hidden"}`}>
               {isCollapsed && <h5>Know More</h5>}
               <p
+                data-tooltip-id="nav9"
                 className="faq-button"
                 onClick={() => {
                   setShowFAQ(true);
@@ -198,7 +215,8 @@ function Sidebar({
                 }}
               >
                 <span className="sidebar-icon ">
-                  <GoQuestion /> <span className="tooltip_text"> FAQ</span>
+                  <GoQuestion />
+                  {/* <span className="tooltip_text"> FAQ</span> */}
                 </span>
                 <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                   FAQ
@@ -207,6 +225,7 @@ function Sidebar({
 
               {/* Feedback Button */}
               <p
+                data-tooltip-id="nav10"
                 className="faq-button faq-text"
                 onClick={() => {
                   setShowFeedback(true);
@@ -215,7 +234,8 @@ function Sidebar({
                 }}
               >
                 <span className="sidebar-icon Feedback-ur-text">
-                  <GoComment /> <span className="tooltip_text">Feedback</span>
+                  <GoComment />
+                  {/* <span className="tooltip_text">Feedback</span> */}
                 </span>
                 <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                   Feedback
@@ -258,6 +278,16 @@ function Sidebar({
           )}
         </div>
       </div>
+      <ReactTooltip id="nav1" place="right" content="Collapse" />
+      <ReactTooltip id="nav2" place="right" content="Start New Thread" />
+      <ReactTooltip id="nav3" place="right" content="Indiaspend" />
+      <ReactTooltip id="nav4" place="right" content="Earthcheck India" />
+      <ReactTooltip id="nav5" place="right" content="Education Check" />
+      <ReactTooltip id="nav6" place="right" content="Gender Check" />
+      <ReactTooltip id="nav7" place="right" content="Newsletters" />
+      <ReactTooltip id="nav8" place="right" content="About" />
+      <ReactTooltip id="nav9" place="right" content="FAQ" />
+      <ReactTooltip id="nav10" place="right" content="Feedback" />
     </>
   );
 }
