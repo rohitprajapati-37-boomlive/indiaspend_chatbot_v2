@@ -371,9 +371,9 @@ body {
           }
         }
 
-        .head_c {
-          padding: 0 0.5rem 0.5rem 0.5rem;
-        }
+        // .head_c {
+        //   padding: 0 0.5rem 0.5rem 0.5rem;
+        // }
       }
     }
     .input-container {
@@ -402,5 +402,17 @@ body {
   .loading-sour {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .question-content h4 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .answer-content p.answer-preview {
+    font-size: 0.9rem;
+  }
+  // faq
+  .faq-content {
+    margin-top: 4rem;
   }
 }

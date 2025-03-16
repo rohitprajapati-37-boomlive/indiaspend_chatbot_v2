@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 
 // import { GoCrossReference } from "react-icons/fi";
 
-import { FiMenu } from "react-icons/fi";
+// import { FiMenu } from "react-icons/fi";
 
 import { BsGenderTrans } from "react-icons/bs";
 import {
@@ -61,6 +61,7 @@ function Sidebar({
     // window.location.reload(); // Page reload karega taki naye chat shuru ho
     setShowFAQ(false);
     setShowFeedback(false);
+    setIsMobileMenuOpen(false);
     startNewThread();
   };
 
@@ -72,7 +73,7 @@ function Sidebar({
           className="mobile-menu-icon left"
           onClick={() => setIsMobileMenuOpen(true)}
         >
-          <FiMenu />
+          <GoSidebarExpand />
         </div>
       )}
 

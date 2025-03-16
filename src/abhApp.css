@@ -55,7 +55,12 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  min-height: 240px;
   max-width: 275px;
+}
+.mainContainer .sidebar_abh .logoDiv {
+  margin-bottom: 1rem;
+  margin-left: 0.22rem;
 }
 .mainContainer .sidebar_abh .logoDiv img {
   width: 1.6rem;
@@ -65,6 +70,7 @@ body {
   color: var(--white);
   flex-grow: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .mainContainer .sidebar_abh .sidebar_block {
   margin-top: 2rem;
@@ -81,11 +87,23 @@ body {
 .mainContainer .sidebar_abh .sidebar_block h5 {
   font-size: 0.84rem;
 }
+.mainContainer .sidebar_abh .sidebar_block .sidebar-text.hidden {
+  display: none;
+}
+.mainContainer .sidebar_abh .sidebar_block .sidebar-icon {
+  position: relative;
+}
 .mainContainer .sidebar_abh .sidebar_block:first-of-type {
   margin-top: 1rem;
+  margin-top: 0;
+  gap: 0.36rem;
+  display: flex;
+  flex-direction: column;
 }
 .mainContainer .sidebar_abh span {
   color: var(--white);
+  display: flex;
+  align-items: center;
 }
 .mainContainer .bodyContainer {
   background-color: var(--secondary-dark-bg);
@@ -115,8 +133,16 @@ body {
   display: flex;
   align-items: center;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: normal;
   justify-content: flex-end;
+}
+.mainContainer .bodyContainer .workingContainer .head_c button.theme-toggle {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.mainContainer .bodyContainer .workingContainer .head_c button.theme-toggle svg {
+  width: 100%;
+  height: 100%;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width {
   width: 85%;
@@ -175,4 +201,76 @@ body {
   margin: auto;
   margin-top: 0.2rem;
   color: var(--primary);
+}
+
+.tooltip_text {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  bottom: 100%; /* tooltip_text button ke upar dikhane ke liye */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.cler-hst-ic,
+.dark-mode-container {
+  position: relative; /* tooltip_text ka position sahi rakhne ke liye */
+  display: inline-block;
+}
+
+.cler-hst-ic:hover .tooltip_text,
+.sidebar-icon:hover .tooltip_text,
+.dark-mode-container:hover .tooltip_text {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 992px) {
+  .questions-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .disclaimer_div {
+    width: 100%;
+    font-size: 0.44rem;
+  }
+  .mainContainer .input-container {
+    width: 95%;
+  }
+  .footer-content {
+    text-align: center;
+  }
+  .footer-content h2 {
+    font-size: 1rem;
+  }
+  .footer-content p {
+    margin: 0 0 0.4rem 0;
+    font-size: 0.6rem;
+  }
+  .sources-section ul {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .loading-sour {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .question-content h4 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .answer-content p.answer-preview {
+    font-size: 0.9rem;
+  }
+  .faq-content {
+    margin-top: 4rem;
+  }
 }/*# sourceMappingURL=abhApp.css.map */
