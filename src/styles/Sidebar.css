@@ -196,6 +196,7 @@ display: none;
   background: transparent;
   color: var(--icon-color);
   font-size: 1.25rem;
+  display: none;
 }
 
 /* ✖ Close Button (Right Side) */
@@ -219,7 +220,7 @@ display: none;
     display: block; /* Show on mobile */
   }
 
-  .sidebar_abh {
+  /* .sidebar_abh {
     position: fixed;
     top: 0;
     left: 0;
@@ -230,7 +231,7 @@ display: none;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
-  }
+  } */
 
   .sidebar_abh.open {
     transform: translateX(0);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { MdSend } from "react-icons/md";
+// import { VscSend } from "react-icons/md";
+import { VscSend } from "react-icons/vsc";
 import "../styles/FeedbackForm.css";
 
 const FeedbackForm = () => {
@@ -94,7 +95,8 @@ const FeedbackForm = () => {
         />
 
         <button type="submit">
-          Submit <MdSend />
+          <span>Submit </span>
+          <VscSend />
         </button>
 
         {message && <p className="message">{message}</p>}

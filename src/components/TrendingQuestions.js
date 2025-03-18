@@ -247,7 +247,7 @@ function TrendingQuestions({
             }
             fetchedAnswer = fetchedAnswer.replace(
               /\[Read more\]\((https?:\/\/[^\s)]+)\)/g,
-              (match, url) => `[Read more](${addUtmToUrl(url)})`
+              (match, url) => `[Read more ➙](${addUtmToUrl(url)})`
             );
 
             console.log("modifiedAnswer", fetchedAnswer);
@@ -462,7 +462,7 @@ function TrendingQuestions({
                   alt={source.title}
                   className="source-image"
                 />
-                <span>{source.title || source.post_url}</span>
+                <h5>{source.title || source.post_url}</h5>
               </a>
             </div>
           </li>
@@ -629,6 +629,7 @@ function TrendingQuestions({
                               <>
                                 {item.iframeInfo && (
                                   <div>
+                                    <hr></hr>
                                     <IframeComponent
                                       key={index}
                                       iframeInfo={item.iframeInfo}
@@ -636,10 +637,11 @@ function TrendingQuestions({
                                   </div>
                                 )}
 
-                                {item.sources?.length > 0 && (
+                                {item.sources && (
                                   <div className="txt-source-url">
+                                    <hr></hr>
                                     <span className="rlte-tite">
-                                      Related Articles Source
+                                      Related articles source
                                     </span>
                                   </div>
                                 )}

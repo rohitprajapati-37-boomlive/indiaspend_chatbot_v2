@@ -6,6 +6,7 @@
   --primary-dark-bg: #003366;
   --secondary-dark-bg: #f3f3ee;
   --therd-dark-bg: #ffffff;
+  --read-more-color: #003366;
   --tw-shadow-color: rgba(60, 64, 67, 0.3);
   --mobile-padding: 0.6rem;
 }
@@ -18,6 +19,7 @@
   --primary-dark-bg: #171717;
   --secondary-dark-bg: #212121;
   --therd-dark-bg: #383737;
+  --read-more-color: #5b86b1;
   --tw-shadow-color: rgba(60, 64, 67, 0.3);
 }
 
@@ -33,6 +35,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .app {
@@ -125,10 +128,34 @@ body {
 .mainContainer .bodyContainer .workingContainer .head_c {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
   padding: 0 1rem 1rem 1rem;
+}
+.mainContainer .bodyContainer .workingContainer .head_c .leftside {
+  display: flex;
+  gap: 1rem;
+}
+.mainContainer .bodyContainer .workingContainer .head_c .leftside .mobile-menu-toggle {
+  color: var(--primary);
+  font-size: 1.5rem;
+  display: none;
+}
+.mainContainer .bodyContainer .workingContainer .head_c .middle {
+  display: none;
+}
+.mainContainer .bodyContainer .workingContainer .head_c .middle .logo-container {
+  color: var(--primary);
+}
+.mainContainer .bodyContainer .workingContainer .head_c .middle .logo-container img {
+  width: 1.6rem;
+  height: auto;
+}
+.mainContainer .bodyContainer .workingContainer .head_c .rightside {
+  display: flex;
+  align-self: flex-start;
+  gap: 1rem;
 }
 .mainContainer .bodyContainer .workingContainer .head_c .clear-history-btn {
   display: flex;
@@ -195,6 +222,7 @@ body {
   border: none;
   font-size: 1rem;
   background-color: var(--secondary-dark-bg);
+  color: var(--primary);
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container button {
   display: flex;
@@ -214,24 +242,6 @@ body {
   color: var(--primary);
 }
 
-.tooltip_text {
-  visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  text-align: center;
-  padding: 5px 8px;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 10;
-  bottom: 100%; /* tooltip_text button ke upar dikhane ke liye */
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 12px;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-
 .cler-hst-ic,
 .dark-mode-container {
   position: relative; /* tooltip_text ka position sahi rakhne ke liye */
@@ -248,6 +258,19 @@ body {
 }
 
 @media (max-width: 992px) {
+  .mobile-menu-toggle {
+    color: var(--primary);
+    font-size: 1.5rem;
+    display: flex !important;
+  }
+  .middle {
+    display: block !important;
+  }
+  .logo-container img {
+    color: var(--primary);
+    width: 1.6rem;
+    height: auto;
+  }
   .questions-grid {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -260,9 +283,14 @@ body {
   }
   .mainContainer .bodyContainer .workingContainer .head_c {
     padding: 0 var(--mobile-padding) 1rem var(--mobile-padding);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3882352941);
   }
   .mainContainer .input-container {
     width: 95%;
+  }
+  .mainContainer iframe.responsive-iframe {
+    width: 100%;
+    height: 70vh;
   }
   .footer-content {
     text-align: center;
@@ -290,6 +318,23 @@ body {
     font-size: 0.9rem;
   }
   .faq-content {
-    margin-top: 4rem;
+    margin-top: 2rem;
+  }
+  .sidebar_abh {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    max-width: 250px;
+    height: 100%;
+    background: var(--primary-dark-bg);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+}
+@media (max-width: 768px) {
+  iframe.responsive-iframe {
+    height: 50vh !important;
   }
 }/*# sourceMappingURL=abhApp.css.map */

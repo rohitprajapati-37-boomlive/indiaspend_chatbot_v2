@@ -115,11 +115,9 @@ li.history-card {
 }
 .answer-content {
   align-items: flex-start;
-  padding: 0px 10px 40px 10px;
   background-color: var(--therd-dark-bg);
   border-radius: 10px;
-  /* max-height: 410px;
-  height: auto; */
+  padding: 10px 10px 40px 10px;
   position: relative;
 }
 
@@ -129,9 +127,15 @@ li.history-card {
   height: auto;
 }
 
+iframe.responsive-iframe{
+  width: 100%;
+  height: 100vh;
+}
+
+
 li.history-card .answer-content p.answer-preview p a {
   text-decoration: none;
-  color: var(--primary);
+  color: var(--read-more-color);
   font-weight: 700;
 }
 
@@ -173,7 +177,8 @@ li.history-card .answer-content p.answer-preview p a {
   gap: 10px;
   padding: 0.4rem;
   border-radius: 5px;
-  box-shadow: rgb(0 0 0 / 30%) 0px 1px 5px 0px, rgb(82 83 83 / 15%) 0px 1px 5px 2px;
+  border: 1px solid #80808063;
+  /* box-shadow: rgb(0 0 0 / 30%) 0px 1px 5px 0px, rgb(82 83 83 / 15%) 0px 1px 5px 2px; */
 }
 
 .sources-section li.sources-tle-url:hover {
@@ -209,16 +214,30 @@ li.history-card .answer-content p.answer-preview p a {
   border-radius: 5px;
 }
 
+.txt-source-url a {
+  color: var(--primary) !important;
+}
+.txt-source-url span.rlte-tite {
+  margin-top: 1.2rem;
+}
 .txt-source-url span {
+  color: var(--read-more-color);
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
+  display: -webkit-box;
+  /* -webkit-line-clamp: 2; */
+  -webkit-box-orient: vertical;
+  font-weight: 700;
+}
+.txt-source-url h5 {
   color: var(--primary);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-
+  font-weight: 700;
 }
-
 .txt-source-url span a:hover {
   color: var(--hover);
 }
@@ -236,7 +255,7 @@ li.history-card .answer-content p.answer-preview p a {
 }
 
 .answer-content p.answer-preview {
-  margin: 5px 0;
+  /* margin: 5px 0; */
   overflow: auto;
   /* height: auto;
   max-height: 400px;
@@ -488,6 +507,7 @@ li.history-card .answer-content p.answer-preview p a {
 
 .clear-hst-ic-txt {
   text-align: right;
+  display: flex;
 }
 
 .clear-hst-ic-txt button.clear-history-btn {

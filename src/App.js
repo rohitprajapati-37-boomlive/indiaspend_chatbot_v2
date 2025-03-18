@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"; // ✅ Import axios
 import logo from "../src/assets/ask_indiaspend.svg";
-import { GoSun, GoMoon, GoTrash } from "react-icons/go";
-
+import { GoSidebarExpand, GoSun, GoMoon, GoTrash } from "react-icons/go";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 // import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { MdSend } from "react-icons/md";
 // import { MdAutoDelete } from "react-icons/md";
@@ -124,7 +124,7 @@ function App() {
   const [previousQuestions, setPreviousQuestions] = useState([]);
 
   const [isStartNewThread, setIsStartNewThread] = useState(false);
-
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const handleShowFAQ = () => {
     setShowFAQ(true);
     setShowFeedback(false);
@@ -181,134 +181,175 @@ function App() {
       setIsSubmit(true);
     }
   };
+
   return (
-    <div class="app">
-      <div class="mainContainer">
-        <Sidebar
-          setShowFAQ={setShowFAQ}
-          setShowFeedback={setShowFeedback}
-          isCollapsed={isCollapsed}
-          toggleSidebar={toggleSidebar}
-          startNewThread={startNewThread}
-        />
-        {/* </div> */}
-        {/* </div> */}
+    <>
+      <div class="app">
+        <div class="mainContainer">
+          <Sidebar
+            setShowFAQ={setShowFAQ}
+            setShowFeedback={setShowFeedback}
+            isCollapsed={isCollapsed}
+            toggleSidebar={toggleSidebar}
+            startNewThread={startNewThread}
+            setIsCollapsed={setIsCollapsed}
+            setIsMobileMenuOpen={setIsMobileMenuOpen}
+            isMobileMenuOpen={isMobileMenuOpen}
+          />
+          {/* </div> */}
+          {/* </div> */}
 
-        <div class="bodyContainer">
-          <div class="workingContainer">
-            <div class="head_c wc_item">
-              <div className="clear-hst-ic-txt">
-                <button
-                  onClick={handleClearHistory}
-                  className="clear-history-btn"
-                >
-                  <div className="cler-hst-ic">
-                    <GoTrash />
-                    <span className="tooltip_text">Clear History</span>
-                  </div>
-                  {/* <div className="cler-hst-txt">Clear History</div> */}
-                </button>
-              </div>
-              <div className="dark-mode-container">
-                <DarkModeToggle />
-                <span className="tooltip_text">Dark</span>
-              </div>
-            </div>
+          <div class="bodyContainer">
+            <div class="workingContainer">
+              <div class="head_c wc_item">
+                <div className="leftside">
+                  {/* sidebar expand */}
 
-            <div class="thin_width">
-              <div className="conents_c wc_item">
-                {!showFAQ && !showFeedback && (
-                  <TrendingQuestions
-                    question={questionString}
-                    isSubmit={isSubmit}
-                    setIsSubmit={setIsSubmit}
-                    setSubmitLoading={setSubmitLoading}
-                    setQuestionString={setQuestionString}
-                    isClearHistory={isClearHistory}
-                    setIsClearHistory={setIsClearHistory}
-                    isStartNewThread={isStartNewThread}
-                    setIsStartNewThread={setIsStartNewThread}
-                  />
-                )}
-
-                {/* FAQ Modal */}
-                {showFAQ && (
-                  <div className="faq-content modal">
-                    <button className="close-btn" onClick={closeModals}>
-                      <MdClose size={24} />
+                  <div>
+                    <button
+                      onClick={() => setIsMobileMenuOpen(true)}
+                      className="mobile-menu-toggle"
+                    >
+                      <GoSidebarExpand />
                     </button>
-                    <FAQ />
-                  </div>
-                )}
-
-                {/* Feedback Modal */}
-                {showFeedback && (
-                  <div className="faq-content modal">
-                    <button className="close-btn" onClick={closeModals}>
-                      <MdClose size={24} />
-                    </button>
-                    <FeedbackForm />
-                  </div>
-                )}
-              </div>
-
-              {!showFAQ && !showFeedback && (
-                <div className="foot_c wc_item">
-                  <div className="footer-content">
-                    <div>
-                      <h2>Got a Question? Get Expert Answers!</h2>
-                      <p>
-                        Ask a data-driven question, and our experts will get
-                        back to you.
-                      </p>
-                    </div>
-
-                    <div className="input-container">
-                      <input
-                        type="text"
-                        placeholder="Ask something here..."
-                        value={questionString}
-                        onChange={(e) => setQuestionString(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        disabled={submitLoading}
-                      />{" "}
-                      <button
-                        type="submit"
-                        className="send-btn"
-                        onClick={handleSubmit}
-                        disabled={submitLoading || questionString === ""}
-                      >
-                        <MdSend />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="disclaimer_div">
-                    <span>
-                      <strong>Disclaimer: </strong>
-                      <span>
-                        Ask IndiaSpend is an AI-powered tool that derives
-                        information from IndiaSpend’s articles and interprets
-                        data based on our reporting. While we strive to provide
-                        accurate and contextual insights, some responses may not
-                        be current. For more information, please refer to our
-                        stories linked in the responses. For any concerns or
-                        clarifications, please reach out to us at{" "}
-                        <a href="mailto:respond@indiaspend.org">
-                          respond@indiaspend.org
-                        </a>
-                      </span>
-                    </span>
                   </div>
                 </div>
-              )}
-            </div>
 
-            {/* <div className="footerContainer wc_item">Disclaimer</div> */}
+                <div className="middle">
+                  {/* logo  */}
+                  <div class="logoDiv">
+                    <div
+                      className="logo-container"
+                      onClick={() => window.location.reload()}
+                    >
+                      <img src={logo} alt="IndiaSpend Logo" className="logo" />
+                      {isCollapsed && <h4>Ask IndiaSpend</h4>}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rightside">
+                  <div className="clear-hst-ic-txt">
+                    <button
+                      onClick={handleClearHistory}
+                      className="clear-history-btn"
+                    >
+                      <div
+                        data-tooltip-id="Clear_History"
+                        className="cler-hst-ic"
+                      >
+                        <GoTrash />
+                        {/* <span className="tooltip_text">Clear History</span> */}
+                      </div>
+                      {/* <div className="cler-hst-txt">Clear History</div> */}
+                    </button>
+                  </div>
+
+                  <div data-tooltip-id="theme" className="dark-mode-container">
+                    <DarkModeToggle />
+                    {/* <span className="tooltip_text">Theme</span> */}
+                  </div>
+                </div>
+              </div>
+
+              <div class="thin_width">
+                <div className="conents_c wc_item">
+                  {!showFAQ && !showFeedback && (
+                    <TrendingQuestions
+                      question={questionString}
+                      isSubmit={isSubmit}
+                      setIsSubmit={setIsSubmit}
+                      setSubmitLoading={setSubmitLoading}
+                      setQuestionString={setQuestionString}
+                      isClearHistory={isClearHistory}
+                      setIsClearHistory={setIsClearHistory}
+                      isStartNewThread={isStartNewThread}
+                      setIsStartNewThread={setIsStartNewThread}
+                    />
+                  )}
+
+                  {/* FAQ Modal */}
+                  {showFAQ && (
+                    <div className="faq-content modal">
+                      <button className="close-btn" onClick={closeModals}>
+                        <MdClose size={24} />
+                      </button>
+                      <FAQ />
+                    </div>
+                  )}
+
+                  {/* Feedback Modal */}
+                  {showFeedback && (
+                    <div className="faq-content modal">
+                      <button className="close-btn" onClick={closeModals}>
+                        <MdClose size={24} />
+                      </button>
+                      <FeedbackForm />
+                    </div>
+                  )}
+                </div>
+
+                {!showFAQ && !showFeedback && (
+                  <div className="foot_c wc_item">
+                    <div className="footer-content">
+                      <div>
+                        <h2>Got a Question? Get Expert Answers!</h2>
+                        <p>
+                          Ask a data-driven question, and our experts will get
+                          back to you.
+                        </p>
+                      </div>
+
+                      <div className="input-container">
+                        <input
+                          type="text"
+                          placeholder="Ask something here..."
+                          value={questionString}
+                          onChange={(e) => setQuestionString(e.target.value)}
+                          onKeyDown={handleKeyDown}
+                          disabled={submitLoading}
+                        />{" "}
+                        <button
+                          type="submit"
+                          className="send-btn"
+                          onClick={handleSubmit}
+                          disabled={submitLoading || questionString === ""}
+                        >
+                          <MdSend />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="disclaimer_div">
+                      <span>
+                        <strong>Disclaimer: </strong>
+                        <span>
+                          Ask IndiaSpend is an AI-powered tool that derives
+                          information from IndiaSpend’s articles and interprets
+                          data based on our reporting. While we strive to
+                          provide accurate and contextual insights, some
+                          responses may not be current. For more information,
+                          please refer to our stories linked in the responses.
+                          For any concerns or clarifications, please reach out
+                          to us at{" "}
+                          <a href="mailto:respond@indiaspend.org">
+                            respond@indiaspend.org
+                          </a>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* <div className="footerContainer wc_item">Disclaimer</div> */}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <ReactTooltip id="theme" place="bottom" content="Theme" />
+      <ReactTooltip id="Clear_History" place="bottom" content="Clear History" />
+    </>
   );
 }
 

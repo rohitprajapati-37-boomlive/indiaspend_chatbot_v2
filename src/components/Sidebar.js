@@ -37,11 +37,13 @@ function Sidebar({
   isCollapsed,
   toggleSidebar,
   startNewThread,
+  setIsMobileMenuOpen,
+  isMobileMenuOpen,
 }) {
   // const [isCollapsed, setIsCollapsed] = useState(false);
   const [previousQuestions, setPreviousQuestions] = useState([]);
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // ✅ Mobile menu toggle ke liye state
+  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // ✅ Mobile menu toggle ke liye state
 
   useEffect(() => {
     const storedHistory =
@@ -278,16 +280,30 @@ function Sidebar({
           )}
         </div>
       </div>
-      <ReactTooltip id="nav1" place="right" content="Collapse" />
-      <ReactTooltip id="nav2" place="right" content="Start New Thread" />
-      <ReactTooltip id="nav3" place="right" content="Indiaspend" />
-      <ReactTooltip id="nav4" place="right" content="Earthcheck India" />
-      <ReactTooltip id="nav5" place="right" content="Education Check" />
-      <ReactTooltip id="nav6" place="right" content="Gender Check" />
-      <ReactTooltip id="nav7" place="right" content="Newsletters" />
-      <ReactTooltip id="nav8" place="right" content="About" />
-      <ReactTooltip id="nav9" place="right" content="FAQ" />
-      <ReactTooltip id="nav10" place="right" content="Feedback" />
+
+      {!isCollapsed && (
+        <div>
+          <ReactTooltip id="nav1" place="right" content="Collapse" />
+
+          <ReactTooltip id="nav2" place="right" content="Start New Thread" />
+
+          <ReactTooltip id="nav3" place="right" content="Indiaspend" />
+
+          <ReactTooltip id="nav4" place="right" content="Earthcheck India" />
+
+          <ReactTooltip id="nav5" place="right" content="Education Check" />
+
+          <ReactTooltip id="nav6" place="right" content="Gender Check" />
+
+          <ReactTooltip id="nav7" place="right" content="Newsletters" />
+
+          <ReactTooltip id="nav8" place="right" content="About" />
+
+          <ReactTooltip id="nav9" place="right" content="FAQ" />
+
+          <ReactTooltip id="nav10" place="right" content="Feedback" />
+        </div>
+      )}
     </>
   );
 }
