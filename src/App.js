@@ -125,47 +125,45 @@ function App() {
 
   const [isStartNewThread, setIsStartNewThread] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-//   const [ userScroll, setUserScroll] = useState(false);
+  //   const [ userScroll, setUserScroll] = useState(false);
   const footerRef = useRef(null);
 
+  //   useEffect(() => {
+  //     const handleScroll = () => {
+  //       if (!footerRef.current) return;
+  //       const { scrollTop, clientHeight, scrollHeight } = footerRef.current;
+  //       if (scrollTop + clientHeight >= scrollHeight - 5) {
+  //         footerRef.current.classList.add("scrolled-bottom");
+  //       } else {
+  //         footerRef.current.classList.remove("scrolled-bottom");
+  //       }
+  //     };
 
-  
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       if (!footerRef.current) return;
-//       const { scrollTop, clientHeight, scrollHeight } = footerRef.current;
-//       if (scrollTop + clientHeight >= scrollHeight - 5) {
-//         footerRef.current.classList.add("scrolled-bottom");
-//       } else {
-//         footerRef.current.classList.remove("scrolled-bottom");
-//       }
-//     };
+  //     const footerEl = footerRef.current;
+  //     footerEl.addEventListener("scroll", handleScroll);
+  //     return () => footerEl.removeEventListener("scroll", handleScroll);
+  //   }, []);
 
-//     const footerEl = footerRef.current;
-//     footerEl.addEventListener("scroll", handleScroll);
-//     return () => footerEl.removeEventListener("scroll", handleScroll);
-//   }, []);
+  // useEffect(() => {
+  //     const handleScroll = () => {
+  //       console.log("🟡 Scrolling detected! Y Offset:", window.scrollY);
 
-// useEffect(() => {
-//     const handleScroll = () => {
-//       console.log("🟡 Scrolling detected! Y Offset:", window.scrollY);
-      
-//       setUserScroll(window.scrollY > 100);
-//     };
+  //       setUserScroll(window.scrollY > 100);
+  //     };
 
-//     window.addEventListener("scroll", handleScroll);
-  
-//     return () => {
-//       console.log("🛑 Scroll event removed!");
-//       window.removeEventListener("scroll", handleScroll);
-//     };
-//   }, []);
+  //     window.addEventListener("scroll", handleScroll);
 
-//   useEffect(() => {
-//     if (userScroll) {
-//       console.log("🟢 Scrolled down!");
-//     }
-//   }, [userScroll]);
+  //     return () => {
+  //       console.log("🛑 Scroll event removed!");
+  //       window.removeEventListener("scroll", handleScroll);
+  //     };
+  //   }, []);
+
+  //   useEffect(() => {
+  //     if (userScroll) {
+  //       console.log("🟢 Scrolled down!");
+  //     }
+  //   }, [userScroll]);
 
   const handleShowFAQ = () => {
     setShowFAQ(true);
@@ -223,6 +221,22 @@ function App() {
       setIsSubmit(true);
     }
   };
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event) => {
+      // Prevent the prompt from showing
+      event.preventDefault();
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+    };
+  }, []);
 
   return (
     <>
