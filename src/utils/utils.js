@@ -96,3 +96,69 @@ export const addUtmToUrl = (url) => {
     return url;
   }
 };
+
+export const sortByPublishedTime = (articles) => {
+  return articles.sort(
+    (a, b) => new Date(b.published_time) - new Date(a.published_time)
+  );
+};
+
+export const getMostRelevantIframeIndex = (question, iframeData) => {
+  // Ensure iframeData has a valid final_response array
+  if (!iframeData || !iframeData.final_response || iframeData.final_response.length === 0) {
+    return -1; // No valid iframes available
+  }
+
+  // Split the question into words (converted to lowercase)
+  const questionWords = question.toLowerCase().split(/\s+/);
+
+  let bestIndex = 0;
+  let highestMatchCount = 0;
+
+  // Iterate over each iframe object in the final_response array
+  iframeData.final_response.forEach((iframe, index) => {
+    const title = iframe.title || "";
+    const titleLower = title.toLowerCase();
+    let matchCount = 0;
+
+    // Count the matching words in the title
+    questionWords.forEach((word) => {
+      if (titleLower.includes(word)) {
+        matchCount++;
+      }
+    });
+
+    // Update bestIndex if current title has more matching words
+    if (matchCount > highestMatchCount) {
+      highestMatchCount = matchCount;
+      bestIndex = index;
+    }
+  });
+
+  // Return the index of the best matching iframe title
+  return bestIndex;
+};
+
+
+export const fetchMetaTitlesFromApi = async (urls) => {
+  try {
+    // Convert the URLs array into a JSON string
+    const urlParam = JSON.stringify(urls);
+
+    // Make the API call
+    const response = await fetch(
+      `https://toolbox.boomlive.in/api_project/mediator_vue.php?get_metatitle_from_arr=${encodeURIComponent(
+        urlParam
+      )}`
+    );
+
+    if (response.ok) {
+      // Parse and return the JSON response
+      return await response.json();
+    } else {
+    }
+  } catch (error) {
+    console.error("Error fetching meta titles from API:", error);
+    throw error; // Re-throw the error for the calling code to handle
+  }
+};

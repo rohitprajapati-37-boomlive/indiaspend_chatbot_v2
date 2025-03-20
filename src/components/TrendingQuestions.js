@@ -5,7 +5,14 @@ import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import logo from "../assets/ask_indiaspend.svg";
 import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
-import { fetchIframes, getDomain, fetchMetaTitle } from "../utils/utils";
+import {
+  fetchIframes,
+  getDomain,
+  fetchMetaTitle,
+  sortByPublishedTime,
+  getMostRelevantIframeIndex,
+  fetchMetaTitlesFromApi,
+} from "../utils/utils";
 import IframeComponent from "./IframeComponent";
 const getRandomQuestions = (questionsArray, count) => {
   const randomQuestions = [];
@@ -61,6 +68,7 @@ function TrendingQuestions({
   const lastPRef = useRef(null);
   const sourcesRef = useRef(null); // Create a reference for the sources section
   const [previousQuestions, setPreviousQuestions] = useState([]);
+  const [userScroll, setUserScroll] = useState(false);
 
   useEffect(() => {
     console.log("QUESTION", question);
@@ -71,6 +79,31 @@ function TrendingQuestions({
       setQuestionString("");
     }
   }, [question, isSubmit]); //
+
+  const historySectionRef = useRef(null);
+
+  useEffect(() => {
+    const historySection = historySectionRef.current;
+
+    const handleScroll = () => {
+      if (historySection) {
+        setUserScroll(historySection.scrollTop > 100);
+        console.log("Scroll Top:", historySection.scrollTop); // This will display the scrollTop value
+      }
+    };
+
+    // Add scroll event listener
+    if (historySection) {
+      historySection.addEventListener("scroll", handleScroll);
+    }
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      if (historySection) {
+        historySection.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (isClearHistory) {
@@ -260,9 +293,23 @@ function TrendingQuestions({
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             console.log(Iframes);
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            const iframeTitles = await fetchMetaTitlesFromApi(Iframes);
+            console.log(
+              "%%%%%%%%%%%%%%%%%%%%%%%%iframeTitles%%%%%%%%%%%%%%%%%%%%%%%%%"
+            );
+            console.log(iframeTitles);
+            console.log(
+              "%%%%%%%%%%%%%%%%%%%%%%%%%iframeTitles%%%%%%%%%%%%%%%%%%%%%%%%"
+            );
+
+            const bestIframeIndex = getMostRelevantIframeIndex(
+              question,
+              iframeTitles
+            );
+
             if (Iframes.length > 0) {
               iframeInfo = {
-                iframeLink: Iframes[0],
+                iframeLink: Iframes[bestIframeIndex],
                 iframeSource: extractedUrls[0],
               };
             }
@@ -434,6 +481,9 @@ function TrendingQuestions({
         index === self.findIndex((s) => s.post_url === source.post_url)
     );
 
+    const sortedSources = sortByPublishedTime(uniqueSources);
+    console.log(sortedSources);
+
     // // Show shimmer effect if loading
     // if (1==1) {
     //   return (
@@ -447,27 +497,30 @@ function TrendingQuestions({
     //     </div>
     //   );
     // }
+    const maxCards = 4;
 
     return (
-      <ul ref={sourcesRef}>
-        {/* <div className="txt-source-url">
-          <span className="rlte-tite">Related Articles Source</span>
-        </div> */}
-        {uniqueSources.map((source, index) => (
-          <li key={index} className="sources-tle-url">
-            <div className="txt-source-url">
-              <a href={source.post_url} target="_blank" rel="noopener ">
-                <img
-                  src={source.preview_image_url}
-                  alt={source.title}
-                  className="source-image"
-                />
-                <h5>{source.title || source.post_url}</h5>
-              </a>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <div className="txt-source-url">
+          <span className="rlte-tite">Related articles</span>
+        </div>
+        <ul ref={sourcesRef}>
+          {sortedSources.slice(0, maxCards).map((source, index) => (
+            <li key={index} className="sources-tle-url">
+              <div className="txt-source-url">
+                <a href={source.post_url} target="_blank" rel="noopener ">
+                  <img
+                    src={source.preview_image_url}
+                    alt={source.title}
+                    className="source-image"
+                  />
+                  <h5>{source.title || source.post_url}</h5>
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   };
 
@@ -507,7 +560,7 @@ function TrendingQuestions({
     <>
       <main className="trending-questions">
         {history.length > 0 && !isStartNewThread && (
-          <div className="history-section">
+          <div className="history-section" ref={historySectionRef}>
             <div className="history-list">
               <ul className="history-items">
                 {[...history].reverse().map((item, index, array) => (
@@ -628,21 +681,18 @@ function TrendingQuestions({
                             ) : (
                               <>
                                 {item.iframeInfo && (
-                                  <div>
-                                    <hr></hr>
-                                    <IframeComponent
-                                      key={index}
-                                      iframeInfo={item.iframeInfo}
-                                    />
-                                  </div>
-                                )}
-
-                                {item.sources && (
-                                  <div className="txt-source-url">
-                                    <hr></hr>
-                                    <span className="rlte-tite">
-                                      Related articles source
-                                    </span>
+                                  <div className="dataviz-section">
+                                    {item.iframeInfo && (
+                                      <div>
+                                        <span className="rlte-tite">
+                                          <strong> Dataviz References</strong>
+                                        </span>
+                                        <IframeComponent
+                                          key={index}
+                                          iframeInfo={item.iframeInfo}
+                                        />
+                                      </div>
+                                    )}
                                   </div>
                                 )}
 

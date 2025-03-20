@@ -36,10 +36,12 @@
 .footer-content h2 {
   margin-top: 0;
   margin-bottom: 0;
+  line-height: 1;
 }
 .footer-content p {
   margin: 10px auto;
   font-size: 0.9rem;
+  line-height: 1;
 }
 
 /* .footer h3 {

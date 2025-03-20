@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios"; // ✅ Import axios
 import logo from "../src/assets/ask_indiaspend.svg";
 import { GoSidebarExpand, GoSun, GoMoon, GoTrash } from "react-icons/go";
@@ -125,6 +125,48 @@ function App() {
 
   const [isStartNewThread, setIsStartNewThread] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+//   const [ userScroll, setUserScroll] = useState(false);
+  const footerRef = useRef(null);
+
+
+  
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (!footerRef.current) return;
+//       const { scrollTop, clientHeight, scrollHeight } = footerRef.current;
+//       if (scrollTop + clientHeight >= scrollHeight - 5) {
+//         footerRef.current.classList.add("scrolled-bottom");
+//       } else {
+//         footerRef.current.classList.remove("scrolled-bottom");
+//       }
+//     };
+
+//     const footerEl = footerRef.current;
+//     footerEl.addEventListener("scroll", handleScroll);
+//     return () => footerEl.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+// useEffect(() => {
+//     const handleScroll = () => {
+//       console.log("🟡 Scrolling detected! Y Offset:", window.scrollY);
+      
+//       setUserScroll(window.scrollY > 100);
+//     };
+
+//     window.addEventListener("scroll", handleScroll);
+  
+//     return () => {
+//       console.log("🛑 Scroll event removed!");
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     if (userScroll) {
+//       console.log("🟢 Scrolled down!");
+//     }
+//   }, [userScroll]);
+
   const handleShowFAQ = () => {
     setShowFAQ(true);
     setShowFeedback(false);
@@ -290,7 +332,7 @@ function App() {
                 </div>
 
                 {!showFAQ && !showFeedback && (
-                  <div className="foot_c wc_item">
+                  <div ref={footerRef} className="foot_c wc_item">
                     <div className="footer-content">
                       <div>
                         <h2>Got a Question? Get Expert Answers!</h2>
@@ -320,7 +362,7 @@ function App() {
                       </div>
                     </div>
 
-                    <div class="disclaimer_div">
+                    <div className="disclaimer_div">
                       <span>
                         <strong>Disclaimer: </strong>
                         <span>
@@ -347,8 +389,14 @@ function App() {
           </div>
         </div>
       </div>
-      <ReactTooltip id="theme" place="bottom" content="Theme" />
-      <ReactTooltip id="Clear_History" place="bottom" content="Clear History" />
+      <div className="tooltip-wrapper">
+        <ReactTooltip id="theme" place="bottom" content="Theme" />
+        <ReactTooltip
+          id="Clear_History"
+          place="bottom"
+          content="Clear History"
+        />
+      </div>
     </>
   );
 }

@@ -174,12 +174,12 @@ function Sidebar({
                   icon: <GoMail />,
                   tooltip: "nav7",
                 },
-                {
-                  text: "About",
-                  link: "https://www.indiaspend.com/about-us",
-                  icon: <GoInfo />,
-                  tooltip: "nav8",
-                },
+                // {
+                //   text: "About",
+                //   link: "https://www.indiaspend.com/about-us",
+                //   icon: <GoInfo />,
+                //   tooltip: "nav8",
+                // },
               ].map((item, index) => (
                 <p
                   key={index}
@@ -206,7 +206,7 @@ function Sidebar({
 
           <div className="sidebar_block">
             <div className={`ttlquicklink ${isCollapsed ? "" : "hidden"}`}>
-              {isCollapsed && <h5>Know More</h5>}
+              {isCollapsed && <h5>Useful Links</h5>}
               <p
                 data-tooltip-id="nav9"
                 className="faq-button"
@@ -217,11 +217,11 @@ function Sidebar({
                 }}
               >
                 <span className="sidebar-icon ">
-                  <GoQuestion />
+                  <GoInfo />
                   {/* <span className="tooltip_text"> FAQ</span> */}
                 </span>
                 <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
-                  FAQ
+                  About
                 </span>
               </p>
 
@@ -283,25 +283,70 @@ function Sidebar({
 
       {!isCollapsed && (
         <div>
-          <ReactTooltip id="nav1" place="right" content="Collapse" />
+          <ReactTooltip
+            id="nav1"
+            place="right"
+            content="Collapse"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav2" place="right" content="Start New Thread" />
+          <ReactTooltip
+            id="nav2"
+            place="right"
+            content="Start New Thread"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav3" place="right" content="Indiaspend" />
+          <ReactTooltip
+            id="nav3"
+            place="right"
+            content="Indiaspend"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav4" place="right" content="Earthcheck India" />
+          <ReactTooltip
+            id="nav4"
+            place="right"
+            content="Earthcheck India"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav5" place="right" content="Education Check" />
+          <ReactTooltip
+            id="nav5"
+            place="right"
+            content="Education Check"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav6" place="right" content="Gender Check" />
+          <ReactTooltip
+            id="nav6"
+            place="right"
+            content="Gender Check"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav7" place="right" content="Newsletters" />
+          <ReactTooltip
+            id="nav7"
+            place="right"
+            content="Newsletters"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav8" place="right" content="About" />
+          {/* <ReactTooltip id="nav8" place="right" content="About" style={{zIndex:9999}}/> */}
 
-          <ReactTooltip id="nav9" place="right" content="FAQ" />
+          <ReactTooltip
+            id="nav9"
+            place="right"
+            content="FAQ"
+            style={{ zIndex: 9999 }}
+          />
 
-          <ReactTooltip id="nav10" place="right" content="Feedback" />
+          <ReactTooltip
+            id="nav10"
+            place="right"
+            content="Feedback"
+            style={{ zIndex: 9999 }}
+          />
         </div>
       )}
     </>

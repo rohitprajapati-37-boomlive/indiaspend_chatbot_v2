@@ -11,9 +11,13 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: var(--primary);
+  color: var(--white);
   overflow-y: auto;
+  background-color: var(--primary-dark-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
+
 .faq-content button.close-btn {
   display: none;
 }
@@ -46,9 +50,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--primary);
   padding: 0 10px;
   border-radius: 5px;
   margin: 0;
+}
+.faq-box-rkcontent p {
+  color: var(--primary);
 }
 
 /* .faq-box-rkcontent h3:hover {

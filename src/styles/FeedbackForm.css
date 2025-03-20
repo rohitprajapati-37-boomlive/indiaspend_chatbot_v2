@@ -5,7 +5,7 @@
 
 .feedback-form input[type="text"], input[type="email"], textarea {
   color: var(--primary);
-  background-color: var(--white);
+  background-color: var(--secondary-dark-bg);
   border: 0.1rem solid var(--secondary-dark-bg);
   border-radius: 10px;
   padding: 1rem;

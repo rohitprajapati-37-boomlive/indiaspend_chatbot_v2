@@ -21,7 +21,7 @@ const IframeComponent = ({ iframeInfo }) => {
         src={iframeInfo.iframeLink}
         // width="auto"
         // height="auto"
-        scrolling="no"
+        // scrolling="no"
         title="Scraped Chart"
       />
       <p className="txt-source-url ttl-url-sour" style={{ marginTop: "20px" }}>
