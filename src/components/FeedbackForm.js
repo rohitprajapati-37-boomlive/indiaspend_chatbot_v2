@@ -64,43 +64,44 @@ const FeedbackForm = () => {
 
   return (
     <div className="feedback-form">
-      <h2 className="text-2xl font-bold mb-2">We Value Your Feedback</h2>
+      <h1 className="text-2xl font-bold mb-2">We Value Your Feedback</h1>
       <p className="text-lg text-gray-600 mb-4">
         Help us improve by sharing your thoughts and suggestions.
       </p>
+      <div class="space-y-4">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="feedback"
+            placeholder="Your Feedback"
+            value={formData.feedback}
+            onChange={handleChange}
+            required
+          />
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="feedback"
-          placeholder="Your Feedback"
-          value={formData.feedback}
-          onChange={handleChange}
-          required
-        />
+          <button type="submit">
+            <span>Submit </span>
+            <VscSend />
+          </button>
 
-        <button type="submit">
-          <span>Submit </span>
-          <VscSend />
-        </button>
-
-        {message && <p className="message">{message}</p>}
-      </form>
+          {message && <p className="message">{message}</p>}
+        </form>
+      </div>
     </div>
   );
 };

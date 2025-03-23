@@ -40,7 +40,7 @@ function FAQ() {
 
   return (
     <div className="faqs-grid">
-      <h2 className="text-2xl font-bold mb-2">Frequently Asked Questions</h2>
+      <h1 className="text-2xl font-bold mb-2">Frequently Asked Questions</h1>
       <p className="text-lg text-gray-600 mb-4">
         Find answers to commonly asked questions about Ask IndiaSpend.
       </p>

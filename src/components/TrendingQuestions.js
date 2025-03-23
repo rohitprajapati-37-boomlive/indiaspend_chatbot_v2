@@ -754,7 +754,7 @@ function TrendingQuestions({
         {isStartNewThread && (
           <div className="questions-grid">
             <div className="tren-q-tit ">
-              <h2 className="text-2xl font-bold">Trending Questions</h2>
+              <h1 className="text-2xl font-bold">Trending Questions</h1>
             </div>
             <div className="refresh-section-container">
               <div className="refresh-section" onClick={handleRefresh}>
@@ -832,7 +832,7 @@ function TrendingQuestions({
         ) : history.length === 0 && !isStartNewThread ? (
           <div className="questions-grid">
             <div className="tren-q-tit ">
-              <h2 className="text-2xl font-bold">Trending Questions</h2>
+              <h1 className="text-2xl font-bold">Trending Questions</h1>
             </div>
             <div className="refresh-section-container">
               <div className="refresh-section" onClick={handleRefresh}>

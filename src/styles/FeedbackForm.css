@@ -1,11 +1,12 @@
 .feedback-form {
   margin: 0 auto;
-  width: 95%;
+  width: 100%;
 }
 
 .feedback-form input[type="text"], input[type="email"], textarea {
   color: var(--primary);
-  background-color: var(--secondary-dark-bg);
+  /* background-color: var(--secondary-dark-bg); */
+  background-color: var(--therd-dark-bg);
   border: 0.1rem solid var(--secondary-dark-bg);
   border-radius: 10px;
   padding: 1rem;
@@ -17,9 +18,9 @@
 
 .feedback-form button {
   padding: 0.5rem 1rem;
-  background-color: var(--black);
-  color: var(--primary);
-  border: 0.01rem solid var(--black);
+  background-color: var(--primary);
+  color: var(--therd-dark-bg);
+  border: 0.01rem solid var(--primary);
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
