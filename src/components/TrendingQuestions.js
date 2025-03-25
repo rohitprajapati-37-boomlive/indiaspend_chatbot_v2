@@ -5,6 +5,7 @@ import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import logo from "../assets/ask_indiaspend.svg";
 import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
+import placeholder from '../assets/placeholder.jpeg';
 import {
   fetchIframes,
   getDomain,
@@ -469,6 +470,30 @@ function TrendingQuestions({
     fetchNewQuestions();
   };
 
+  const validateImageUrls = (data) => {
+    return data.map((item) => {
+      const isValidImageUrl = (url) => {
+        if (!url) return false;
+        // Exclude the specific URL by marking it as invalid
+        if (url === "https://www.indiaspend.com/images/logo.png") return false;
+        
+        // Regex to check for valid image extensions
+        const imageExtensions = /\.(jpeg|jpg|gif|png|webp|svg)$/i;
+        return imageExtensions.test(url);
+      };
+  
+      return {
+        ...item,
+        preview_image_url: isValidImageUrl(item.preview_image_url)
+          ? item.preview_image_url
+          : null, // or "" if you prefer an empty string
+      };
+    });
+  };
+  
+
+  
+
   const formatMarkdownToJSX = (markdownText) => {
     // Replace single line breaks with two spaces (soft break) to trigger new lines
     let formattedText = markdownText.replace(/\n/g, "  \n");
@@ -496,8 +521,10 @@ function TrendingQuestions({
         index === self.findIndex((s) => s.post_url === source.post_url)
     );
 
-    const sortedSources = sortByPublishedTime(uniqueSources);
-    console.log(sortedSources);
+    const abcd = validateImageUrls(uniqueSources);
+
+    const sortedSources = sortByPublishedTime(abcd);
+    console.log("sortedSources",sortedSources);
 
     // // Show shimmer effect if loading
     // if (1==1) {
@@ -525,7 +552,7 @@ function TrendingQuestions({
               <div className="txt-source-url">
                 <a href={source.post_url} target="_blank" rel="noopener ">
                   <img
-                    src={source.preview_image_url}
+                    src={source.preview_image_url || placeholder}
                     alt={source.title}
                     className="source-image"
                   />
@@ -534,6 +561,7 @@ function TrendingQuestions({
               </div>
             </li>
           ))}
+
         </ul>
       </div>
     );
@@ -581,12 +609,11 @@ function TrendingQuestions({
                 {[...history].reverse().map((item, index, array) => (
                   <li
                     key={index}
-                    className={`history-card ${
-                      expandedAnswer === item.answer ||
-                      index === array.length - 1
+                    className={`history-card ${expandedAnswer === item.answer ||
+                        index === array.length - 1
                         ? "expanded"
                         : ""
-                    }`}
+                      }`}
                     ref={index === array.length - 1 ? lastAnswerRef : null}
                   >
                     <div className="question-content">
@@ -611,7 +638,7 @@ function TrendingQuestions({
                       >
                         <ReactMarkdown components={{ a: CustomLink }}>
                           {expandedAnswer === item.answer ||
-                          index === array.length - 1
+                            index === array.length - 1
                             ? formatMarkdownToJSX(item.answer)
                             : `${item.answer.substring(0, 250)}...`}
                         </ReactMarkdown>
@@ -657,65 +684,65 @@ function TrendingQuestions({
                         )} */}
                         {(expandedAnswer === item.answer ||
                           index === array.length - 1) && (
-                          <div className="sources-section text-lg">
-                            {/* Show loading until all three are loaded */}
-                            {sourceLoading && index === array.length - 1 ? (
-                              <div className="loading-sour">
-                                <div className="skeleton-card-sour">
-                                  <div className="skeleton-image-sour"></div>
-                                  <div className="skeleton-text-container">
-                                    <div className="skeleton-text-sour"></div>
-                                    <div className="skeleton-text-sour"></div>
+                            <div className="sources-section text-lg">
+                              {/* Show loading until all three are loaded */}
+                              {sourceLoading && index === array.length - 1 ? (
+                                <div className="loading-sour">
+                                  <div className="skeleton-card-sour">
+                                    <div className="skeleton-image-sour"></div>
+                                    <div className="skeleton-text-container">
+                                      <div className="skeleton-text-sour"></div>
+                                      <div className="skeleton-text-sour"></div>
+                                    </div>
+                                  </div>
+
+                                  <div className="skeleton-card-sour">
+                                    <div className="skeleton-image-sour"></div>
+                                    <div className="skeleton-text-container">
+                                      <div className="skeleton-text-sour"></div>
+                                      <div className="skeleton-text-sour"></div>
+                                    </div>
+                                  </div>
+
+                                  <div className="skeleton-card-sour">
+                                    <div className="skeleton-image-sour"></div>
+                                    <div className="skeleton-text-container">
+                                      <div className="skeleton-text-sour"></div>
+                                      <div className="skeleton-text-sour"></div>
+                                    </div>
+                                  </div>
+
+                                  <div className="skeleton-card-sour">
+                                    <div className="skeleton-image-sour"></div>
+                                    <div className="skeleton-text-container">
+                                      <div className="skeleton-text-sour"></div>
+                                      <div className="skeleton-text-sour"></div>
+                                    </div>
                                   </div>
                                 </div>
+                              ) : (
+                                <>
+                                  {item.iframeInfo && (
+                                    <div className="dataviz-section">
+                                      {item.iframeInfo && (
+                                        <div>
+                                          <span className="rlte-tite">
+                                            <strong> Dataviz References</strong>
+                                          </span>
+                                          <IframeComponent
+                                            key={index}
+                                            iframeInfo={item.iframeInfo}
+                                          />
+                                        </div>
+                                      )}
+                                    </div>
+                                  )}
 
-                                <div className="skeleton-card-sour">
-                                  <div className="skeleton-image-sour"></div>
-                                  <div className="skeleton-text-container">
-                                    <div className="skeleton-text-sour"></div>
-                                    <div className="skeleton-text-sour"></div>
-                                  </div>
-                                </div>
-
-                                <div className="skeleton-card-sour">
-                                  <div className="skeleton-image-sour"></div>
-                                  <div className="skeleton-text-container">
-                                    <div className="skeleton-text-sour"></div>
-                                    <div className="skeleton-text-sour"></div>
-                                  </div>
-                                </div>
-
-                                <div className="skeleton-card-sour">
-                                  <div className="skeleton-image-sour"></div>
-                                  <div className="skeleton-text-container">
-                                    <div className="skeleton-text-sour"></div>
-                                    <div className="skeleton-text-sour"></div>
-                                  </div>
-                                </div>
-                              </div>
-                            ) : (
-                              <>
-                                {item.iframeInfo && (
-                                  <div className="dataviz-section">
-                                    {item.iframeInfo && (
-                                      <div>
-                                        <span className="rlte-tite">
-                                          <strong> Dataviz References</strong>
-                                        </span>
-                                        <IframeComponent
-                                          key={index}
-                                          iframeInfo={item.iframeInfo}
-                                        />
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-
-                                {item.sources && renderSources(item.sources)}
-                              </>
-                            )}
-                          </div>
-                        )}
+                                  {item.sources && renderSources(item.sources)}
+                                </>
+                              )}
+                            </div>
+                          )}
                       </p>
 
                       {index !== array.length - 1 && (
