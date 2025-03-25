@@ -51,14 +51,25 @@ function TrendingQuestions({
   setIsClearHistory,
   isStartNewThread,
   setIsStartNewThread,
+  questionsSet,
+  setQuestionsSet,
+  questions,
+  setQuestions,
+  setLoading,
+  loading,
+  setError,
+  error,
+  setIsEducationCheck,
+  setIsGenderCheck,
+  setIsEarthCheck
 }) {
-  const [questions, setQuestions] = useState([]);
-  const [questionsSet, setQuestionsSet] = useState([]);
+  // const [questions, setQuestions] = useState([]);
+  // const [questionsSet, setQuestionsSet] = useState([]);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [answer, setAnswer] = useState("");
   const [sources, setSources] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(true);
   const [sourceLoading, setSourceLoading] = useState(false);
 
   const [history, setHistory] = useState([]);
@@ -202,6 +213,9 @@ function TrendingQuestions({
   }
   const handleQuestionClick = async (question) => {
     setIsStartNewThread(false);
+    setIsEducationCheck(false)
+    setIsGenderCheck(false)
+    setIsEarthCheck(false)
     setIsSubmit(false);
     setSelectedQuestion(question);
     setLoading(true);
@@ -353,7 +367,8 @@ function TrendingQuestions({
               }
               return !shouldRemove;
             });
-            articleInfo = await fetchMetadataFromApi(fetchedSources);
+            const topFourSources = fetchedSources.slice(0, 4); // Get first 4 URLs
+            articleInfo = await fetchMetadataFromApi(topFourSources);
             // console.log(articleInfo);
             setSources(data.sources); // Update sources state
             setSourceLoading(false);

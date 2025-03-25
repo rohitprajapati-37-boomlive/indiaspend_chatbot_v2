@@ -162,3 +162,50 @@ export const fetchMetaTitlesFromApi = async (urls) => {
     throw error; // Re-throw the error for the calling code to handle
   }
 };
+
+
+
+
+// export const fetchTopicWiseQuestions = async (topic) => {
+//   setLoading(true);
+//   try {
+//     const response = await fetch(
+//       `https://toolbox.boomlive.in/api_project/indiaspendtemp.php?pulljson2=true&queType=${topic}`,
+//       { method: "GET", headers: { "Content-Type": "application/json" } }
+//     );
+
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch questions");
+//     }
+ 
+//     const data = await response.json();
+//     const cleanedQuestions = data.latest_json.questions.map(cleanQuestion);
+//     const nonEmptyQuestions = cleanedQuestions.filter((q) => q !== "");
+//     setQuestionsSet(nonEmptyQuestions);
+//     const randomQuestions = getRandomQuestions(nonEmptyQuestions, 4);
+//     setQuestions(randomQuestions);
+//   } catch (error) {
+//     setError("Error fetching questions");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+export const getRandomQuestions = (questionsArray, count) => {
+  const randomQuestions = [];
+  const questionsCopy = [...questionsArray];
+
+  for (let i = 0; i < count; i++) {
+    if (questionsCopy.length === 0) break;
+    const randomIndex = Math.floor(Math.random() * questionsCopy.length);
+    randomQuestions.push(questionsCopy.splice(randomIndex, 1)[0]);
+  }
+
+  return randomQuestions;
+};
+
+export const cleanQuestion = (question) => {
+  return question
+    .replace(/^Article\s*\d*: \s*/, "")
+    .replace(/^- /, "")
+    .trim();
+};

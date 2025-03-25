@@ -27,7 +27,7 @@ import {
 } from "react-icons/go";
 
 import logo from "../assets/ask_indiaspend.svg";
-
+import { getRandomQuestions, cleanQuestion } from "../utils/utils";
 import "../styles/Sidebar.css";
 
 function Sidebar({
@@ -39,6 +39,16 @@ function Sidebar({
   startNewThread,
   setIsMobileMenuOpen,
   isMobileMenuOpen,
+  setIsEarthCheck,
+  setIsEducationCheck,
+  setIsGenderCheck,
+  setQuestions,
+  setQuestionsSet,
+  setLoading,
+  loading,
+  setError,
+  error,
+  setIsStartNewThread
 }) {
   // const [isCollapsed, setIsCollapsed] = useState(false);
   const [previousQuestions, setPreviousQuestions] = useState([]);
@@ -67,6 +77,36 @@ function Sidebar({
     setIsMobileMenuOpen(false);
     startNewThread();
   };
+
+
+
+  const fetchTopicWiseQuestions = async (topic) => {
+    // setLoading(true);
+    setIsStartNewThread(true);
+
+    try {
+      const response = await fetch(
+        `https://toolbox.boomlive.in/api_project/indiaspendtemp.php?pulljson2=true&queType=${topic}`,
+        { method: "GET", headers: { "Content-Type": "application/json" } }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch questions");
+      }
+
+      const data = await response.json();
+      const cleanedQuestions = data.latest_json.questions.map(cleanQuestion);
+      const nonEmptyQuestions = cleanedQuestions.filter((q) => q !== "");
+      setQuestionsSet(nonEmptyQuestions);
+      const randomQuestions = getRandomQuestions(nonEmptyQuestions, 4);
+      setQuestions(randomQuestions);
+    } catch (error) {
+      setError("Error fetching questions");
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   return (
     <>
@@ -152,55 +192,74 @@ function Sidebar({
                 },
                 {
                   text: "Earthcheck India",
-                  link: "https://www.indiaspend.com/earthcheckindia",
+                  // link: "https://www.indiaspend.com/earthcheckindia",
                   icon: <GoGlobe />,
                   tooltip: "nav4",
+                  onClickCallback: () => {
+                    console.log("Custom logic for Earthcheck India");
+                    // perform additional operations if needed
+
+                    fetchTopicWiseQuestions("earthcheckindia")
+                    setIsEarthCheck(true);
+                  },
                 },
                 {
                   text: "Education Check",
-                  link: "https://www.indiaspend.com/education-check",
+                  // link: "https://www.indiaspend.com/education-check",
                   icon: <GoRepo />,
                   tooltip: "nav5",
+                  onClickCallback: () => {
+                    console.log("Custom logic for Education ");
+                    fetchTopicWiseQuestions("education-check")
+
+                    // perform additional operations if needed
+                    setIsEducationCheck(true);
+                  },
                 },
                 {
                   text: "Gender Check",
-                  link: "https://www.indiaspend.com/gendercheck",
+                  // link: "https://www.indiaspend.com/gendercheck",
                   icon: <BsGenderTrans />,
                   tooltip: "nav6",
+                  onClickCallback: () => {
+                    console.log("Custom logic for Gender Check");
+                    fetchTopicWiseQuestions("gendercheck")
+                    setIsGenderCheck(true);
+                  },
                 },
                 {
                   text: "Newsletters",
                   link: "https://www.indiaspend.com/subscribe",
                   icon: <GoMail />,
                   tooltip: "nav7",
+                  // You can optionally add a callback here as well.
                 },
-                // {
-                //   text: "About",
-                //   link: "https://www.indiaspend.com/about-us",
-                //   icon: <GoInfo />,
-                //   tooltip: "nav8",
-                // },
               ].map((item, index) => (
                 <p
                   key={index}
                   className="faq-button"
                   data-tooltip-id={item.tooltip}
                   onClick={() => {
-                    window.open(item.link);
+                    // Call the custom callback if it exists.
+                    if (item.onClickCallback) {
+                      item.onClickCallback();
+                    }
+                    // Default behavior: open the link and close the mobile menu.
+                    // Only open link if it exists.
+                    if (item.link) {
+                      window.open(item.link, "_blank");
+                    }
+
                     setIsMobileMenuOpen(false);
                   }}
                 >
-                  <span className="sidebar-icon">
-                    {item.icon}
-                    {/* <span className="tooltip_text">{item.text}</span> */}
-                  </span>
-                  <span
-                    className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}
-                  >
+                  <span className="sidebar-icon">{item.icon}</span>
+                  <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                     {item.text}
                   </span>
                 </p>
               ))}
+
             </div>
           </div>
 

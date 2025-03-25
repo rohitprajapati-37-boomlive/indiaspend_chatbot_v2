@@ -110,7 +110,9 @@ function App() {
   const [showFAQ, setShowFAQ] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [questions, setQuestions] = useState("");
   const [question, setQuestion] = useState("");
+
   const [questionString, setQuestionString] = useState("");
 
   const [isClearHistory, setIsClearHistory] = useState(false);
@@ -126,44 +128,18 @@ function App() {
   const [isStartNewThread, setIsStartNewThread] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   //   const [ userScroll, setUserScroll] = useState(false);
+
+  const [isEarthCheck, setIsEarthCheck] = useState(false);
+  const [isEducationCheck, setIsEducationCheck] = useState(false);
+  const [isGenderCheck, setIsGenderCheck] = useState(false);
+  const [questionsSet, setQuestionsSet] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const footerRef = useRef(null);
 
-  //   useEffect(() => {
-  //     const handleScroll = () => {
-  //       if (!footerRef.current) return;
-  //       const { scrollTop, clientHeight, scrollHeight } = footerRef.current;
-  //       if (scrollTop + clientHeight >= scrollHeight - 5) {
-  //         footerRef.current.classList.add("scrolled-bottom");
-  //       } else {
-  //         footerRef.current.classList.remove("scrolled-bottom");
-  //       }
-  //     };
 
-  //     const footerEl = footerRef.current;
-  //     footerEl.addEventListener("scroll", handleScroll);
-  //     return () => footerEl.removeEventListener("scroll", handleScroll);
-  //   }, []);
 
-  // useEffect(() => {
-  //     const handleScroll = () => {
-  //       console.log("🟡 Scrolling detected! Y Offset:", window.scrollY);
 
-  //       setUserScroll(window.scrollY > 100);
-  //     };
-
-  //     window.addEventListener("scroll", handleScroll);
-
-  //     return () => {
-  //       console.log("🛑 Scroll event removed!");
-  //       window.removeEventListener("scroll", handleScroll);
-  //     };
-  //   }, []);
-
-  //   useEffect(() => {
-  //     if (userScroll) {
-  //       console.log("🟢 Scrolled down!");
-  //     }
-  //   }, [userScroll]);
 
   const handleShowFAQ = () => {
     setShowFAQ(true);
@@ -190,15 +166,7 @@ function App() {
   };
 
   const handleClearHistory = () => {
-    // const storedHistory =
-    //   JSON.parse(localStorage.getItem("questionHistory")) || [];
-    // localStorage.removeItem("questionHistory"); // Chat history delete karega
-    // setPreviousQuestions(storedHistory.slice(0, 5)); // Last 5 questions store karega
-    // // window.location.reload(); // Page refresh karega taki naye chat shuru ho
-    // // setAnswer(""); // Clear previous answer
-    // // setSources([]); // Clear previous sources
-    // // setError(null);
-    // setHistory([]);
+
     setIsClearHistory(true);
   };
 
@@ -251,6 +219,16 @@ function App() {
             setIsCollapsed={setIsCollapsed}
             setIsMobileMenuOpen={setIsMobileMenuOpen}
             isMobileMenuOpen={isMobileMenuOpen}
+            setIsEarthCheck={setIsEarthCheck}
+            setIsEducationCheck={setIsEducationCheck}
+            setIsGenderCheck={setIsGenderCheck}
+            setQuestions={setQuestions}
+            setQuestionsSet={setQuestionsSet}
+            setLoading={setLoading}
+            loading={loading}
+            setError={setError}
+            error={error}
+            setIsStartNewThread={setIsStartNewThread}
           />
           {/* </div> */}
           {/* </div> */}
@@ -321,6 +299,17 @@ function App() {
                       setIsClearHistory={setIsClearHistory}
                       isStartNewThread={isStartNewThread}
                       setIsStartNewThread={setIsStartNewThread}
+                      questionsSet={questionsSet}
+                      setQuestionsSet={setQuestionsSet}
+                      questions={questions}
+                      setQuestions={setQuestions}
+                      setLoading={setLoading}
+                      loading={loading}
+                      setError={setError}
+                      error={error}
+                      setIsEducationCheck={setIsEducationCheck}
+                      setIsGenderCheck={setIsGenderCheck}
+                      setIsEarthCheck={setIsEarthCheck}
                     />
                   )}
 
