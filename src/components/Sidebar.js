@@ -67,6 +67,7 @@ function Sidebar({
 
   // ✅ Start New Thread - LocalStorage se chat clear + Previous Questions dikhai de
   const handleNewThread = () => {
+    fetchTopicWiseQuestions("json")
     const storedHistory =
       JSON.parse(localStorage.getItem("questionHistory")) || [];
     localStorage.removeItem("questionHistory"); // Chat history delete karega
@@ -198,7 +199,7 @@ function Sidebar({
                   onClickCallback: () => {
                     console.log("Custom logic for Earthcheck India");
                     // perform additional operations if needed
-
+                    setIsStartNewThread(true);
                     fetchTopicWiseQuestions("earthcheckindia")
                     setIsEarthCheck(true);
                   },
@@ -249,7 +250,8 @@ function Sidebar({
                     if (item.link) {
                       window.open(item.link, "_blank");
                     }
-
+                    setShowFAQ(false);
+                    setShowFeedback(false);
                     setIsMobileMenuOpen(false);
                   }}
                 >
