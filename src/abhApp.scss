@@ -8,9 +8,15 @@
   // light theme background colors
 
   --primary-dark-bg: #003366;
-  --secondary-dark-bg: #f3f3ee;
-  --therd-dark-bg: #ffffff;
+  // --secondary-dark-bg: #f3f3ee;
+  --secondary-dark-bg: #ffffff;
+  // --therd-dark-bg: #ffffff;
+  --therd-dark-bg: #f2f3f5;;
   --read-more-color: #003366;
+  
+
+
+  --quest-hoverbg: #E9EEF6;
 
   // --primary-color: #003366;
   // --text-color: #333333;
@@ -39,10 +45,15 @@
   // dark theme background colors
   --primary-dark-bg: #171717;
   --secondary-dark-bg: #212121;
+  // --therd-dark-bg: #383737;
   --therd-dark-bg: #383737;
   --read-more-color: #5b86b1;
 
   --tw-shadow-color: rgba(60, 64, 67, 0.3);
+
+
+
+  --quest-hoverbg: #444444;
 
   // --active: #2673b0;
   // --hover: #337ab7;
@@ -53,6 +64,8 @@
   // --border-color: #1f1f1f;
   // --tw-shadow: 0 -2px 10px rgba(255, 255, 255, 0.1);
   // --background-color: #1a1a1a;
+
+
 }
 
 .grecaptcha-badge {

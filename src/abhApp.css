@@ -4,9 +4,10 @@
   --primary: #4d4d4d;
   --icon-color: #212121;
   --primary-dark-bg: #003366;
-  --secondary-dark-bg: #f3f3ee;
-  --therd-dark-bg: #ffffff;
+  --secondary-dark-bg: #ffffff;
+  --therd-dark-bg: #f2f3f5;
   --read-more-color: #003366;
+  --quest-hoverbg: #E9EEF6;
   --tw-shadow-color: rgba(60, 64, 67, 0.3);
   --mobile-padding: 0.6rem;
 }
@@ -21,6 +22,7 @@
   --therd-dark-bg: #383737;
   --read-more-color: #5b86b1;
   --tw-shadow-color: rgba(60, 64, 67, 0.3);
+  --quest-hoverbg: #444444;
 }
 
 .grecaptcha-badge {
