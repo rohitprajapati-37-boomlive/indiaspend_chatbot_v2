@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Merriweather+Sans:wght@300..800&display=swap");
+body {
+  font-family: "Lato", sans-serif;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+}
+
 :root {
   --white: #fff;
   --black: #e9e9e9;
@@ -186,7 +195,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: -webkit-fill-available;
-  gap: 1rem;
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -203,6 +211,8 @@ body {
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .answer-preview p {
   margin-bottom: 0.34rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .answer-preview p strong {
   margin-bottom: 0.2rem;
@@ -241,6 +251,27 @@ body {
   width: 80%;
   border: none;
   flex-grow: 1;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content {
+  justify-content: flex-end;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content h4 {
+  background-color: #e1f0ff;
+  line-height: 1.6;
+  padding: 0.6rem 1rem;
+  border-radius: 1rem;
+  margin-bottom: 0.8rem;
+  font-weight: normal;
+  color: black;
+  font-family: "Lato", sans-serif;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content .answer-content {
+  background-color: none;
+  display: flex;
+  justify-content: flex-start;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content .answer-content .answer-icon .chatbot_orb {
+  width: 2.6rem;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c {
   width: 100%;

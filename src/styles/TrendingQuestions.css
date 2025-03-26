@@ -113,16 +113,17 @@
 }
 
 li.history-card {
-  margin-bottom: 1.4rem;
+  margin-bottom: 2rem;
 }
 
 .answer-content {
   align-items: flex-start;
-  background-color: var(--therd-dark-bg);
+  /* background-color: var(--therd-dark-bg); */
   border-radius: 10px;
   /* padding: 10px 10px 40px 10px; */
   padding: 0.5rem 0.8rem 2rem 0.8rem;;
   position: relative;
+  /* border: 1px solid rgb(249, 249, 249); */
 }
 
 .answer-content .custom-icon {
@@ -259,8 +260,13 @@ li.history-card .answer-content p.answer-preview p a {
 
 .question-content .question-icon,
 .answer-icon {
-  margin-block-start: 1.2rem;
+  /* margin-block-start: 1.2rem; */
   margin-block-end: 1rem;
+}
+
+.answer-icon  .chatbot_orb {
+  width: 2.6rem;
+  margin-top: -4px;
 }
 
 .question-content h4:first-letter {

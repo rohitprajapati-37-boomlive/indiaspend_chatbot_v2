@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Merriweather+Sans:wght@300..800&display=swap');
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+}
+
+
 :root {
   // light theme text colors
   --white: #fff;
@@ -8,19 +19,14 @@
   // light theme background colors
 
   --primary-dark-bg: #003366;
-  // --secondary-dark-bg: #f3f3ee;
   --secondary-dark-bg: #ffffff;
-  // --therd-dark-bg: #ffffff;
-  --therd-dark-bg: #f2f3f5;;
+  --therd-dark-bg: #f2f3f5;
+  ;
   --read-more-color: #003366;
-  
+
 
 
   --quest-hoverbg: #E9EEF6;
-
-  // --primary-color: #003366;
-  // --text-color: #333333;
-  // --copy-right: rgb(31 41 55);
 
   --tw-shadow-color: rgba(60, 64, 67, 0.3);
 
@@ -28,13 +34,6 @@
 }
 
 [data-theme="dark"] {
-  // --white: #f9f9f9;
-  // --black: #303030;
-  // --primary: #fff;
-  // --primary-color: #212121;
-  // --primary-dark-bg: #212121;
-  // --text-color: #ffffff;
-  // --copy-right: rgb(33 33 33);
 
   // dark theme text colors
   --white: #c3c3c3;
@@ -55,18 +54,12 @@
 
   --quest-hoverbg: #444444;
 
-  // --active: #2673b0;
-  // --hover: #337ab7;
-
-  // --secondary: #919191;
-  // --secondary-dark-bg: #3f3e3e;
-
-  // --border-color: #1f1f1f;
-  // --tw-shadow: 0 -2px 10px rgba(255, 255, 255, 0.1);
-  // --background-color: #1a1a1a;
-
 
 }
+
+
+
+
 
 .grecaptcha-badge {
   display: none !important;
@@ -313,7 +306,7 @@ body {
         flex-direction: column;
         justify-content: space-between;
         height: -webkit-fill-available;
-        gap: 1rem;
+        // gap: 1rem;
         flex-grow: 1;
         overflow-y: auto;
 
@@ -347,6 +340,8 @@ body {
           .answer-preview {
             p {
               margin-bottom: 0.34rem;
+              font-size: 1.2rem;
+              line-height: 1.6;
 
               strong {
                 margin-bottom: 0.2rem;
@@ -430,6 +425,42 @@ body {
 
 
 
+          .trending-questions {
+
+
+
+            .question-content {
+              justify-content: flex-end;
+
+              h4 {
+                background-color: #e1f0ff;
+                line-height: 1.6;
+                // padding: 0.4rem .6rem;
+                padding: 0.6rem 1rem;
+                // border-radius: 0 1.6rem 1.6rem 1.6rem;
+                border-radius: 1rem;
+                margin-bottom: 0.8rem;
+                font-weight: normal;
+                color: black;
+                font-family: "Lato", sans-serif;
+              }
+
+
+              .answer-content {
+                background-color: none;
+                display: flex;
+                justify-content: flex-start;
+
+
+               .answer-icon .chatbot_orb {
+                  width: 2.6rem;
+                }
+              }
+            }
+          }
+
+
+
 
         }
 
@@ -475,21 +506,7 @@ body {
               }
             }
 
-            // input {
-            //   background-color: var(--secondary-dark-bg);
-            //   border: 1px solid var(--border-color);
-            //   border-radius: 10px;
-            //   color: var(--white);
-            //   flex: 1 1;
-            //   font-size: 1.2rem;
-            //   font-weight: 500;
-            //   line-height: 1.1;
-            //   outline: none;
-            //   padding: 15px 50px 15px 25px;
-            //   position: relative;
-            //   width: 100%;
-            //   border: none;
-            // }
+
           }
 
           .disclaimer_div {
@@ -506,23 +523,7 @@ body {
   }
 }
 
-// .tooltip_text {
-//   visibility: hidden;
-//   background-color: rgba(0, 0, 0, 0.75);
-//   color: #fff;
-//   text-align: center;
-//   padding: 5px 8px;
-//   border-radius: 5px;
-//   position: absolute;
-//   z-index: 10;
-//   bottom: 100%; /* tooltip_text button ke upar dikhane ke liye */
-//   // left: 50%;
-//   transform: translateX(-50%);
-//   white-space: nowrap;
-//   font-size: 12px;
-//   opacity: 0;
-//   transition: opacity 0.2s ease-in-out;
-// }
+
 
 .cler-hst-ic,
 .dark-mode-container {
@@ -753,6 +754,7 @@ body {
             height: 14.4vh;
 
           }
+
           .foot_c::-webkit-scrollbar {
             display: none;
           }
@@ -760,10 +762,4 @@ body {
       }
     }
   }
-}
-
-@media (max-width: 768px) {
-  // iframe.responsive-iframe {
-  //   height: 50vh !important;
-  // }
 }

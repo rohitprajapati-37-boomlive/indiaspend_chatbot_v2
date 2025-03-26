@@ -7,6 +7,9 @@ import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
 // import placeholder from '../assets/placeholder.jpeg';
 import placeholder from '../assets/abcd3.png';
+import Lottie from "lottie-react";
+
+import lottie from '../assets/lottieobj.json';
 import {
   fetchIframes,
   getDomain,
@@ -317,7 +320,7 @@ function TrendingQuestions({
             }
             fetchedAnswer = fetchedAnswer.replace(
               /\[Read more\]\((https?:\/\/[^\s)]+)\)/g,
-              (match, url) => `[Read more ➙](${addUtmToUrl(url)})`
+              (match, url) => `[Read more](${addUtmToUrl(url)})`
             );
 
             console.log("modifiedAnswer", fetchedAnswer);
@@ -672,13 +675,14 @@ function TrendingQuestions({
                       </h4>
                     </div>
                     <div className="answer-content">
-                      {/* <div className="answer-icon">
-                        <img
+                      <div className="answer-icon">
+                        {/* <img
                           src={logo}
                           alt="Ask IndiaSpend"
                           className="custom-icon"
-                        />
-                      </div> */}
+                        /> */}
+                        <Lottie className="chatbot_orb"  animationData={lottie} loop={true} size={1} />
+                      </div>
                       <p
                         className="answer-preview"
                         ref={index === 0 ? lastPRef : null}
@@ -687,7 +691,7 @@ function TrendingQuestions({
                           {expandedAnswer === item.answer ||
                             index === array.length - 1
                             ? formatMarkdownToJSX(item.answer)
-                            : `${item.answer.substring(0, 250)}...`}
+                            : `${item.answer.substring(0, 250)}...`} 
                         </ReactMarkdown>
 
                         {/* {(expandedAnswer === item.answer ||
@@ -910,7 +914,7 @@ function TrendingQuestions({
         {error && <p className="error">{error}</p>}
 
         {loading ? (
-          <div className="loading"  ref={loadingRef} >
+          <div className="loading" ref={loadingRef} >
             <div className="skeleton-card">
               <div className="skeleton-loader"></div>
               <div className="skeleton-item"></div>
