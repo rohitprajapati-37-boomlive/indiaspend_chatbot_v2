@@ -5,7 +5,8 @@ import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import logo from "../assets/ask_indiaspend.svg";
 import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
-import placeholder from '../assets/placeholder.jpeg';
+// import placeholder from '../assets/placeholder.jpeg';
+import placeholder from '../assets/abcd3.png';
 import {
   fetchIframes,
   getDomain,
@@ -80,8 +81,16 @@ function TrendingQuestions({
   const lastPRef = useRef(null);
   const sourcesRef = useRef(null); // Create a reference for the sources section
   const [previousQuestions, setPreviousQuestions] = useState([]);
-  const [userScroll, setUserScroll] = useState(false);
+  const [questionAsked, setQuestionAsked] = useState(false);
+  const historySectionRef = useRef(null);
+  const loadingRef = useRef(null);
 
+  // When the loading state changes, scroll into view if loading is true
+  useEffect(() => {
+    if (loading && loadingRef.current) {
+      loadingRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [loading]);
   useEffect(() => {
     console.log("QUESTION", question);
 
@@ -92,30 +101,37 @@ function TrendingQuestions({
     }
   }, [question, isSubmit]); //
 
-  const historySectionRef = useRef(null);
 
-  useEffect(() => {
-    const historySection = historySectionRef.current;
+  // const handleScroll = () => {
+  //   const historySection = historySectionRef.current;
 
-    const handleScroll = () => {
-      if (historySection) {
-        setUserScroll(historySection.scrollTop > 100);
-        console.log("Scroll Top:", historySection.scrollTop); // This will display the scrollTop value
-      }
-    };
+  //   if (historySection) {
+  //     setUserScroll(historySection.scrollTop > 100);
+  //     console.log("Scroll Top:", historySection.scrollTop); // This will display the scrollTop value
+  //   }
+  // };
+  // useEffect(() => {
+  //   const historySection = historySectionRef.current;
 
-    // Add scroll event listener
-    if (historySection) {
-      historySection.addEventListener("scroll", handleScroll);
-    }
+  //   const handleScroll = () => {
+  //     if (historySection) {
+  //       setUserScroll(historySection.scrollTop > 100);
+  //       console.log("Scroll Top:", historySection.scrollTop); // This will display the scrollTop value
+  //     }
+  //   };
 
-    // Cleanup the event listener on component unmount
-    return () => {
-      if (historySection) {
-        historySection.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+  //   // Add scroll event listener
+  //   if (historySection) {
+  //     historySection.addEventListener("scroll", handleScroll);
+  //   }
+
+  //   // Cleanup the event listener on component unmount
+  //   return () => {
+  //     if (historySection) {
+  //       historySection.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (isClearHistory) {
@@ -131,7 +147,12 @@ function TrendingQuestions({
         block: "start",
       });
     }
-  }, [history]); // Trigger effect when `history` changes
+
+    // Small delay to ensure smooth scrolling
+    setTimeout(() => {
+      window.scrollBy(0, 50); // Scrolls 50px more down
+    }, 300);
+  }, [questionAsked]); // Trigger effect when `history` changes
 
   useEffect(() => {
     // Scroll to the sources section when sources are updated
@@ -213,6 +234,7 @@ function TrendingQuestions({
     }
   }
   const handleQuestionClick = async (question) => {
+    setQuestionAsked(true)
     setIsStartNewThread(false);
     setIsEducationCheck(false)
     setIsGenderCheck(false)
@@ -429,6 +451,7 @@ function TrendingQuestions({
       setError("Failed to stream the answer");
       setLoading(false);
     }
+    setQuestionAsked(false)
   };
 
   const fetchMetadataFromApi = async (urls) => {
@@ -470,18 +493,42 @@ function TrendingQuestions({
     fetchNewQuestions();
   };
 
+  // const validateImageUrls = (data) => {
+  //   return data.map((item) => {
+  //     const isValidImageUrl = (url) => {
+  //       if (!url) return false;
+  //       // Exclude the specific URL by marking it as invalid
+  //       if (url === "https://www.indiaspend.com/images/logo.png") return false;
+
+  //       // Regex to check for valid image extensions
+  //       const imageExtensions = /\.(jpeg|jpg|gif|png|webp|svg)$/i;
+  //       return imageExtensions.test(url);
+  //     };
+
+  //     return {
+  //       ...item,
+  //       preview_image_url: isValidImageUrl(item.preview_image_url)
+  //         ? item.preview_image_url
+  //         : null, // or "" if you prefer an empty string
+  //     };
+  //   });
+  // };
+
+
   const validateImageUrls = (data) => {
     return data.map((item) => {
       const isValidImageUrl = (url) => {
         if (!url) return false;
-        // Exclude the specific URL by marking it as invalid
+        // Exclude specific URL
         if (url === "https://www.indiaspend.com/images/logo.png") return false;
-        
+        // Exclude any URL that contains 'wp-content'
+        if (url.includes("wp-content")) return false;
+
         // Regex to check for valid image extensions
         const imageExtensions = /\.(jpeg|jpg|gif|png|webp|svg)$/i;
         return imageExtensions.test(url);
       };
-  
+
       return {
         ...item,
         preview_image_url: isValidImageUrl(item.preview_image_url)
@@ -490,9 +537,9 @@ function TrendingQuestions({
       };
     });
   };
-  
 
-  
+
+
 
   const formatMarkdownToJSX = (markdownText) => {
     // Replace single line breaks with two spaces (soft break) to trigger new lines
@@ -524,7 +571,7 @@ function TrendingQuestions({
     const abcd = validateImageUrls(uniqueSources);
 
     const sortedSources = sortByPublishedTime(abcd);
-    console.log("sortedSources",sortedSources);
+    console.log("sortedSources", sortedSources);
 
     // // Show shimmer effect if loading
     // if (1==1) {
@@ -605,14 +652,14 @@ function TrendingQuestions({
         {history.length > 0 && !isStartNewThread && (
           <div className="history-section" ref={historySectionRef}>
             <div className="history-list">
-              <ul className="history-items">
+              <ul className="history-items" >
                 {[...history].reverse().map((item, index, array) => (
                   <li
                     key={index}
                     className={`history-card ${expandedAnswer === item.answer ||
-                        index === array.length - 1
-                        ? "expanded"
-                        : ""
+                      index === array.length - 1
+                      ? "expanded"
+                      : ""
                       }`}
                     ref={index === array.length - 1 ? lastAnswerRef : null}
                   >
@@ -863,7 +910,7 @@ function TrendingQuestions({
         {error && <p className="error">{error}</p>}
 
         {loading ? (
-          <div className="loading">
+          <div className="loading"  ref={loadingRef} >
             <div className="skeleton-card">
               <div className="skeleton-loader"></div>
               <div className="skeleton-item"></div>
