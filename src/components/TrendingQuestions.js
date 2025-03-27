@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { MdOutlineRefresh, MdAutoDelete } from "react-icons/md";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
+import { GoArrowDown } from "react-icons/go";
+import { GoArrowUp } from "react-icons/go";
 import logo from "../assets/ask_indiaspend.svg";
 import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
@@ -810,9 +812,11 @@ function TrendingQuestions({
                           >
                             <div className="expand-answer-icon">
                               {expandedAnswer === item.answer ? (
-                                <FaLongArrowAltUp />
+                                // <FaLongArrowAltUp />
+                                <GoArrowUp />
                               ) : (
-                                <FaLongArrowAltDown />
+                                // <FaLongArrowAltDown />
+                                <GoArrowDown />
                               )}
                             </div>
                             <div className="expand-text-rk">

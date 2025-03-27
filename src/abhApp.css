@@ -252,6 +252,12 @@ body {
   border: none;
   flex-grow: 1;
 }
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions li.history-card:hover .expand-container {
+  display: block;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions li.history-card:last-of-type {
+  margin-bottom: 2rem;
+}
 .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content {
   justify-content: flex-end;
 }
@@ -269,6 +275,10 @@ body {
   background-color: none;
   display: flex;
   justify-content: flex-start;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content .answer-content .expand-container {
+  border: none;
+  outline: none;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content .answer-content .answer-icon .chatbot_orb {
   width: 2.6rem;

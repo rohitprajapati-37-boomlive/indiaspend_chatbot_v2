@@ -427,6 +427,19 @@ body {
 
           .trending-questions {
 
+            li.history-card {
+              // border: 1px solid #858585;
+
+            }
+
+            li.history-card:hover .expand-container {
+              display: block;
+            }
+
+            li.history-card:last-of-type {
+              margin-bottom: 2rem;
+            }
+
 
 
             .question-content {
@@ -450,6 +463,19 @@ body {
                 background-color: none;
                 display: flex;
                 justify-content: flex-start;
+
+
+                .expand-container {
+                  border: none;
+                  outline: none;
+
+
+                  // .text-expand-rk .expand-answer-icon {
+                  //   display: flex;
+                  // }
+
+
+                }
 
 
                .answer-icon .chatbot_orb {
