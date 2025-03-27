@@ -12,6 +12,11 @@ p {
   --black: #e9e9e9;
   --primary: #4d4d4d;
   --icon-color: #212121;
+  --questbg: #e1f0ff;
+  --questtext: black;
+  --questExpandBd: #d1d1d1;
+  --input-container: #fff;
+  --submit-btn-bg: #003366;
   --primary-dark-bg: #003366;
   --secondary-dark-bg: #ffffff;
   --therd-dark-bg: #f2f3f5;
@@ -26,12 +31,17 @@ p {
   --black: #303030;
   --primary: #c3c3c3;
   --icon-color: #989898;
+  --questbg: #333537;
   --primary-dark-bg: #171717;
   --secondary-dark-bg: #212121;
   --therd-dark-bg: #383737;
   --read-more-color: #5b86b1;
   --tw-shadow-color: rgba(60, 64, 67, 0.3);
   --quest-hoverbg: #444444;
+  --questtext: #c3c3c3;
+  --questExpandBd: #c3c3c3;
+  --input-container: #333537;
+  --submit-btn-bg: #525252;
 }
 
 .grecaptcha-badge {
@@ -133,7 +143,7 @@ body {
   height: 100vh;
 }
 .mainContainer .bodyContainer .workingContainer .head_c {
-  width: 100%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -190,7 +200,7 @@ body {
   height: 100%;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width {
-  width: 85%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -227,7 +237,7 @@ body {
   border: 1px solid rgba(216, 216, 216, 0.4823529412);
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .dataviz-section {
-  border: 1px solid rgb(213, 213, 213);
+  border: 1px solid rgba(122, 122, 122, 0.4588235294);
   margin-top: 2rem;
   padding: 0.7rem 1rem 1rem 1rem;
   border-radius: 5px;
@@ -262,13 +272,13 @@ body {
   justify-content: flex-end;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content h4 {
-  background-color: #e1f0ff;
+  background-color: var(--questbg);
   line-height: 1.6;
   padding: 0.6rem 1rem;
   border-radius: 1rem;
   margin-bottom: 0.8rem;
   font-weight: normal;
-  color: black;
+  color: var(--questtext);
   font-family: "Lato", sans-serif;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .trending-questions .question-content .answer-content {
@@ -286,39 +296,64 @@ body {
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c {
   width: 100%;
 }
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .info {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .info h2 {
+  font-size: 2rem;
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .info p {
+  font-size: 1.2rem;
+}
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content {
   width: 100%;
-  background-color: var(--primary-dark-bg);
   color: var(--white);
   border-radius: 0.75rem;
-  padding: 0.8rem;
+  padding: 0 0 0.8rem 0;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container {
-  background-color: var(--secondary-dark-bg);
+  background-color: var(--input-container);
   border: none;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  position: relative;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
-.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container input {
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container input, .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container textarea {
   width: -webkit-fill-available;
   outline: none;
   border: none;
   font-size: 1rem;
-  background-color: var(--secondary-dark-bg);
+  background-color: transparent;
   color: var(--primary);
+  margin: 0;
+  padding: 0;
+  resize: none;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container button {
   display: flex;
   align-items: center;
+  background-color: var(--submit-btn-bg);
+  color: white;
+  border-radius: 50%;
+  padding: 0.4rem;
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.6rem;
+  outline: none;
   border: none;
-  background-color: var(--secondary-dark-bg);
-  color: var(--icon-color);
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container button svg {
   font-size: 1.4rem;
+  transform: translateX(2px);
+}
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .footer-content .input-container button:hover {
+  background-color: #345a80;
+  cursor: pointer;
 }
 .mainContainer .bodyContainer .workingContainer .thin_width .foot_c .disclaimer_div {
   font-size: 0.65rem;

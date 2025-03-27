@@ -16,6 +16,12 @@ p {
   --primary: #4d4d4d;
   --icon-color: #212121;
 
+  --questbg: #e1f0ff;
+  --questtext: black;
+  --questExpandBd: #d1d1d1;
+  --input-container: #fff;
+  --submit-btn-bg: #003366;
+
   // light theme background colors
 
   --primary-dark-bg: #003366;
@@ -41,6 +47,10 @@ p {
   --primary: #c3c3c3;
   --icon-color: #989898;
 
+
+
+  --questbg: #333537;
+
   // dark theme background colors
   --primary-dark-bg: #171717;
   --secondary-dark-bg: #212121;
@@ -53,8 +63,10 @@ p {
 
 
   --quest-hoverbg: #444444;
-
-
+  --questtext: #c3c3c3;
+  --questExpandBd: #c3c3c3;
+  --input-container: #333537;
+  --submit-btn-bg:  #525252;
 }
 
 
@@ -215,7 +227,7 @@ body {
       .head_c {
         // background-color: purple;
 
-        width: 100%;
+        width: 95%;
 
         display: flex;
 
@@ -301,7 +313,7 @@ body {
       // }
 
       .thin_width {
-        width: 85%;
+        width: 70%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -379,7 +391,8 @@ body {
 
           .dataviz-section {
             // background-color: rgb(231, 231, 231);
-            border: 1px solid rgb(213, 213, 213);
+            border: 1px solid #7a7a7a75;
+            
             margin-top: 2rem;
             // padding: 1rem;
             padding: 0.7rem 1rem 1rem 1rem;
@@ -446,7 +459,8 @@ body {
               justify-content: flex-end;
 
               h4 {
-                background-color: #e1f0ff;
+                background-color: var( --questbg);
+                // color: ;
                 line-height: 1.6;
                 // padding: 0.4rem .6rem;
                 padding: 0.6rem 1rem;
@@ -454,7 +468,7 @@ body {
                 border-radius: 1rem;
                 margin-bottom: 0.8rem;
                 font-weight: normal;
-                color: black;
+                color: var(--questtext);
                 font-family: "Lato", sans-serif;
               }
 
@@ -494,42 +508,96 @@ body {
           // background-color: yellow;
           width: 100%;
 
+
+          .info {
+            // display: none;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+
+            h2 {
+              font-size: 2rem;
+            }
+
+            p {
+              font-size: 1.2rem;
+            }
+          }
+
+
           .footer-content {
             width: 100%;
-            background-color: var(--primary-dark-bg);
+            // background-color: var(--primary-dark-bg);
             color: var(--white);
             border-radius: 0.75rem;
-            padding: 0.8rem;
+            padding: 0 0 0.8rem 0 ;
+            // overflow: visible;
 
             .input-container {
-              background-color: var(--secondary-dark-bg);
+              background-color: var(--input-container);
               border: none;
-              border-radius: 0.75rem;
+              // border: 1px solid #c9c9c9;
+              // border: 1px solid black;
+              border-radius: 1rem;
               display: flex;
               justify-content: space-between;
               align-items: center;
-              padding: 0.6rem;
+              padding: 0.6rem 0.8rem;
+              position: relative;
+              // padding: 0.8rem 1rem;
+              // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+              // box-shadow: #00000014 0px 3px 12px;
+              // box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+              // box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+              box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
-              input {
+              input, textarea {
                 width: -webkit-fill-available;
                 outline: none;
                 border: none;
                 font-size: 1rem;
-                background-color: var(--secondary-dark-bg);
+                // background-color: var(--secondary-dark-bg);
+                background-color: transparent;
                 color: var(--primary);
+                margin: 0;
+                padding: 0;
+                resize: none;
               }
 
               button {
                 display: flex;
                 align-items: center;
+                // border: 1px solid black;
+                background-color: var(--submit-btn-bg);
+                color: white;
+                border-radius: 50%;
+                // background-color: var(--secondary-dark-bg);
+                // color: var(--icon-color);
+                padding: 0.4rem;
+                position: absolute;
+                bottom: 0.6rem;
+                right: 0.6rem;
+                outline: none;
                 border: none;
-                background-color: var(--secondary-dark-bg);
-                color: var(--icon-color);
 
                 svg {
                   font-size: 1.4rem;
+                  transform: translateX(2px);
                 }
               }
+
+              button:hover {
+                background-color: #345a80;
+                cursor: pointer;
+              }
+            }
+
+            // .input-container input:focus .input-container {
+            //   border: 1px solid #003366;
+            // }
+
+
+            .input-container:focus-within {
+              // border: 1px solid #003366;
             }
 
 
@@ -544,6 +612,8 @@ body {
             color: var(--primary);
           }
         }
+
+    
       }
     }
   }

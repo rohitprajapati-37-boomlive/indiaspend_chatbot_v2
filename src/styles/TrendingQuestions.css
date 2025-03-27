@@ -304,7 +304,9 @@ li.history-card .answer-content p.answer-preview p a {
   border: none;
   outline: none;
   background-color: transparent;
-  border: 1px solid rgb(209, 209, 209);
+  /* border: 1px solid rgb(209, 209, 209); */
+  border: 1px solid var(--questExpandBd);
+  color: var(--questtext);
   display: none;
 
   

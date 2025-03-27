@@ -11,7 +11,7 @@ import "../styles/TrendingQuestions.css";
 import placeholder from '../assets/abcd3.png';
 import Lottie from "lottie-react";
 
-import lottie from '../assets/lottieobj.json';
+import lottie from '../assets/lottiejson.json';
 import {
   fetchIframes,
   getDomain,
@@ -68,7 +68,9 @@ function TrendingQuestions({
   error,
   setIsEducationCheck,
   setIsGenderCheck,
-  setIsEarthCheck
+  setIsEarthCheck,
+  setHistory,
+  history
 }) {
   // const [questions, setQuestions] = useState([]);
   // const [questionsSet, setQuestionsSet] = useState([]);
@@ -79,7 +81,7 @@ function TrendingQuestions({
   // const [loading, setLoading] = useState(true);
   const [sourceLoading, setSourceLoading] = useState(false);
 
-  const [history, setHistory] = useState([]);
+  // const [history, setHistory] = useState([]);
   // const [iframeInfo, setIframeInfo] = useState(null);
   const [expandedAnswer, setExpandedAnswer] = useState(null);
   const lastAnswerRef = useRef(null);

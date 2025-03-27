@@ -134,6 +134,7 @@ function App() {
   const [isGenderCheck, setIsGenderCheck] = useState(false);
   const [questionsSet, setQuestionsSet] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [history, setHistory] = useState([]);
 
   const footerRef = useRef(null);
 
@@ -310,6 +311,8 @@ function App() {
                       setIsEducationCheck={setIsEducationCheck}
                       setIsGenderCheck={setIsGenderCheck}
                       setIsEarthCheck={setIsEarthCheck}
+                      history={history}
+                      setHistory={setHistory}
                     />
                   )}
 
@@ -337,23 +340,34 @@ function App() {
                 {!showFAQ && !showFeedback && (
                   <div ref={footerRef} className="foot_c wc_item">
                     <div className="footer-content">
-                      <div>
-                        <h2>Got a Question? Get Expert Answers!</h2>
-                        <p>
-                          Ask a data-driven question, and our experts will get
-                          back to you.
-                        </p>
-                      </div>
+                      {history.length === 0 && !isStartNewThread && (
+
+                        <div className="info">
+                          <h2>Got a Question? Get Expert Answers!</h2>
+                          <p>
+                            Ask a data-driven question, and our experts will get
+                            back to you.
+                          </p>
+                        </div>
+                      )}
 
                       <div className="input-container">
-                        <input
+                        {/* <input
                           type="text"
                           placeholder="Ask something here..."
                           value={questionString}
                           onChange={(e) => setQuestionString(e.target.value)}
                           onKeyDown={handleKeyDown}
                           disabled={submitLoading}
-                        />{" "}
+                        />{" "} */}
+                        <textarea
+                          placeholder="Ask something here..."
+                          value={questionString}
+                          onChange={(e) => setQuestionString(e.target.value)}
+                          onKeyDown={handleKeyDown}
+                          disabled={submitLoading}
+                          rows="2"
+                        />
                         <button
                           type="submit"
                           className="send-btn"
