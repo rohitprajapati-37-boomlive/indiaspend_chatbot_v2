@@ -308,7 +308,19 @@ function TrendingQuestions({
             fetchedAnswer = fetchedAnswer.slice(0, sourcesIndex).trim();
             // console.log(fetchedAnswer);
           }
-
+          const updatedHistory = [
+            {
+              question,
+              answer: fetchedAnswer,
+              sources: articleInfo,
+              timestamp: new Date().toISOString(),
+              iframeInfo: iframeInfo,
+            },
+            ...history,
+          ];
+          setHistory(updatedHistory);
+          console.log("yoooooooooooooooooooooo")
+          localStorage.setItem("questionHistory", JSON.stringify(updatedHistory));
           return;
         }
 
@@ -427,8 +439,8 @@ function TrendingQuestions({
           ...history,
         ];
         setHistory(updatedHistory);
-
-        localStorage.setItem("questionHistory", JSON.stringify(updatedHistory));
+        // console.log("yoooooooooooooooooooooo")
+        // localStorage.setItem("questionHistory", JSON.stringify(updatedHistory));
         setLoading(false);
         setSubmitLoading(false);
       };
