@@ -248,6 +248,14 @@ function App() {
                       <GoSidebarExpand />
                     </button>
                   </div>
+
+
+                  <div
+                    className="logo-container main"
+                  >
+                    <img src={logo} alt="IndiaSpend Logo" className="logo" />
+                    <h4>Ask IndiaSpend</h4>
+                  </div>
                 </div>
 
                 <div className="middle">
