@@ -155,7 +155,7 @@ function Sidebar({
               className="toggle-button sidebar-icon"
               onClick={toggleSidebar}
             >
-              {isCollapsed ? <GoSidebarCollapse /> : <GoSidebarExpand />}
+              {isCollapsed ? <GoSidebarExpand /> : <GoSidebarCollapse />}
               <span className={`sidebar-text ${isCollapsed ? "" : "hidden"}`}>
                 Collapse
               </span>

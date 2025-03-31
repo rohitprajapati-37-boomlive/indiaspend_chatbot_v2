@@ -167,7 +167,7 @@ function App() {
   };
 
   const handleClearHistory = () => {
-
+    setHistory([]);
     setIsClearHistory(true);
   };
 
@@ -348,7 +348,7 @@ function App() {
                 {!showFAQ && !showFeedback && (
                   <div ref={footerRef} className="foot_c wc_item">
                     <div className="footer-content">
-                      {history.length === 0 && !isStartNewThread && (
+                      {(history.length == 0 || isStartNewThread )&& (
 
                         <div className="info">
                           <h2>Got a Question? Get Expert Answers!</h2>
