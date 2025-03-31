@@ -318,7 +318,8 @@ function Sidebar({
         </p> */}
 
           {/* ✅ Previous Questions - Click karne par Trending Questions dikhai de */}
-          {isCollapsed && (
+          {/* Dont delete below code | temporarily not using ------ */}
+          {/* {isCollapsed && (
             <div className="sidebar_block">
               <div className="previous-questions">
                 <h5>Previous 7 Days</h5>
@@ -338,7 +339,7 @@ function Sidebar({
                 )}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 

@@ -248,14 +248,6 @@ function App() {
                       <GoSidebarExpand />
                     </button>
                   </div>
-
-
-                  <div
-                    className="logo-container main"
-                  >
-                    <img src={logo} alt="IndiaSpend Logo" className="logo" />
-                    <h4>Ask IndiaSpend</h4>
-                  </div>
                 </div>
 
                 <div className="middle">
@@ -268,6 +260,13 @@ function App() {
                       <img src={logo} alt="IndiaSpend Logo" className="logo" />
                       {isCollapsed && <h4>Ask IndiaSpend</h4>}
                     </div>
+                  </div>
+
+                  <div
+                    className="logo-container main"
+                  >
+                    <img src={logo} alt="IndiaSpend Logo" className="logo" />
+                    <h4>Ask IndiaSpend</h4>
                   </div>
                 </div>
 
@@ -346,7 +345,7 @@ function App() {
                 </div>
 
                 {!showFAQ && !showFeedback && (
-                  <div ref={footerRef} className="foot_c wc_item">
+                  <div ref={footerRef} className={`foot_c wc_item ${history.length === 0 || isStartNewThread ? "withGotQ" : "withoutGotQ"}`}>
                     <div className="footer-content">
                       {(history.length == 0 || isStartNewThread )&& (
 
