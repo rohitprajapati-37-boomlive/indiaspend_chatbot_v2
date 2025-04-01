@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios"; // ✅ Import axios
 import logo from "../src/assets/ask_indiaspend.svg";
-import { GoSidebarExpand, GoSun, GoMoon, GoTrash } from "react-icons/go";
+import { GoSidebarExpand, GoSidebarCollapse, GoSun, GoMoon, GoTrash } from "react-icons/go";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 // import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { MdSend } from "react-icons/md";
@@ -245,7 +245,8 @@ function App() {
                       onClick={() => setIsMobileMenuOpen(true)}
                       className="mobile-menu-toggle"
                     >
-                      <GoSidebarExpand />
+                      {/* <GoSidebarExpand /> */}
+                      <GoSidebarCollapse />
                     </button>
                   </div>
                 </div>
