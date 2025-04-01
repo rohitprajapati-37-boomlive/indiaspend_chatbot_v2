@@ -8,10 +8,10 @@ import logo from "../assets/ask_indiaspend.svg";
 import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
 // import placeholder from '../assets/placeholder.jpeg';
-import placeholder from '../assets/abcd3.png';
+import placeholder from "../assets/abcd3.png";
 import Lottie from "lottie-react";
 
-import lottie from '../assets/lottiejson.json';
+import lottie from "../assets/lottiejson.json";
 import {
   fetchIframes,
   getDomain,
@@ -70,7 +70,7 @@ function TrendingQuestions({
   setIsGenderCheck,
   setIsEarthCheck,
   setHistory,
-  history
+  history,
 }) {
   // const [questions, setQuestions] = useState([]);
   // const [questionsSet, setQuestionsSet] = useState([]);
@@ -95,7 +95,10 @@ function TrendingQuestions({
   // When the loading state changes, scroll into view if loading is true
   useEffect(() => {
     if (loading && loadingRef.current) {
-      loadingRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      loadingRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   }, [loading]);
   useEffect(() => {
@@ -107,7 +110,6 @@ function TrendingQuestions({
       setQuestionString("");
     }
   }, [question, isSubmit]); //
-
 
   // const handleScroll = () => {
   //   const historySection = historySectionRef.current;
@@ -241,11 +243,11 @@ function TrendingQuestions({
     }
   }
   const handleQuestionClick = async (question) => {
-    setQuestionAsked(true)
+    setQuestionAsked(true);
     setIsStartNewThread(false);
-    setIsEducationCheck(false)
-    setIsGenderCheck(false)
-    setIsEarthCheck(false)
+    setIsEducationCheck(false);
+    setIsGenderCheck(false);
+    setIsEarthCheck(false);
     setIsSubmit(false);
     setSelectedQuestion(question);
     setLoading(true);
@@ -319,8 +321,11 @@ function TrendingQuestions({
             ...history,
           ];
           setHistory(updatedHistory);
-          console.log("yoooooooooooooooooooooo")
-          localStorage.setItem("questionHistory", JSON.stringify(updatedHistory));
+          console.log("yoooooooooooooooooooooo");
+          localStorage.setItem(
+            "questionHistory",
+            JSON.stringify(updatedHistory)
+          );
           return;
         }
 
@@ -409,7 +414,11 @@ function TrendingQuestions({
               }
               return !shouldRemove;
             });
-            const topFourSources = fetchedSources.slice(0, 4); // Get first 4 URLs
+
+            // Remove duplicates by converting to a Set and back to an array
+            const uniqueSources = [...new Set(fetchedSources)];
+
+            const topFourSources = await uniqueSources.slice(0, 4); // Get first 4 URLs
             articleInfo = await fetchMetadataFromApi(topFourSources);
             // console.log(articleInfo);
             setSources(data.sources); // Update sources state
@@ -470,11 +479,13 @@ function TrendingQuestions({
       setError("Failed to stream the answer");
       setLoading(false);
     }
-    setQuestionAsked(false)
+    setQuestionAsked(false);
   };
 
   const fetchMetadataFromApi = async (urls) => {
     try {
+      console.log("fetched fours urls to be searched", urls, urls.length);
+
       // Convert the URLs array into a JSON string
       const urlParam = JSON.stringify(urls);
 
@@ -494,6 +505,8 @@ function TrendingQuestions({
     } catch (error) {
       console.error("Error fetching metadata from API:", error);
       throw error; // Re-throw the error for the calling code to handle
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -533,7 +546,6 @@ function TrendingQuestions({
   //   });
   // };
 
-
   const validateImageUrls = (data) => {
     return data.map((item) => {
       const isValidImageUrl = (url) => {
@@ -556,9 +568,6 @@ function TrendingQuestions({
       };
     });
   };
-
-
-
 
   const formatMarkdownToJSX = (markdownText) => {
     // Replace single line breaks with two spaces (soft break) to trigger new lines
@@ -627,7 +636,6 @@ function TrendingQuestions({
               </div>
             </li>
           ))}
-
         </ul>
       </div>
     );
@@ -671,15 +679,16 @@ function TrendingQuestions({
         {history.length > 0 && !isStartNewThread && (
           <div className="history-section" ref={historySectionRef}>
             <div className="history-list">
-              <ul className="history-items" >
+              <ul className="history-items">
                 {[...history].reverse().map((item, index, array) => (
                   <li
                     key={index}
-                    className={`history-card ${expandedAnswer === item.answer ||
+                    className={`history-card ${
+                      expandedAnswer === item.answer ||
                       index === array.length - 1
-                      ? "expanded"
-                      : ""
-                      }`}
+                        ? "expanded"
+                        : ""
+                    }`}
                     ref={index === array.length - 1 ? lastAnswerRef : null}
                   >
                     <div className="question-content">
@@ -697,7 +706,12 @@ function TrendingQuestions({
                           alt="Ask IndiaSpend"
                           className="custom-icon"
                         /> */}
-                        <Lottie className="chatbot_orb"  animationData={lottie} loop={true} size={1} />
+                        <Lottie
+                          className="chatbot_orb"
+                          animationData={lottie}
+                          loop={true}
+                          size={1}
+                        />
                       </div>
                       <p
                         className="answer-preview"
@@ -705,9 +719,9 @@ function TrendingQuestions({
                       >
                         <ReactMarkdown components={{ a: CustomLink }}>
                           {expandedAnswer === item.answer ||
-                            index === array.length - 1
+                          index === array.length - 1
                             ? formatMarkdownToJSX(item.answer)
-                            : `${item.answer.substring(0, 250)}...`} 
+                            : `${item.answer.substring(0, 250)}...`}
                         </ReactMarkdown>
 
                         {/* {(expandedAnswer === item.answer ||
@@ -751,65 +765,65 @@ function TrendingQuestions({
                         )} */}
                         {(expandedAnswer === item.answer ||
                           index === array.length - 1) && (
-                            <div className="sources-section text-lg">
-                              {/* Show loading until all three are loaded */}
-                              {sourceLoading && index === array.length - 1 ? (
-                                <div className="loading-sour">
-                                  <div className="skeleton-card-sour">
-                                    <div className="skeleton-image-sour"></div>
-                                    <div className="skeleton-text-container">
-                                      <div className="skeleton-text-sour"></div>
-                                      <div className="skeleton-text-sour"></div>
-                                    </div>
-                                  </div>
-
-                                  <div className="skeleton-card-sour">
-                                    <div className="skeleton-image-sour"></div>
-                                    <div className="skeleton-text-container">
-                                      <div className="skeleton-text-sour"></div>
-                                      <div className="skeleton-text-sour"></div>
-                                    </div>
-                                  </div>
-
-                                  <div className="skeleton-card-sour">
-                                    <div className="skeleton-image-sour"></div>
-                                    <div className="skeleton-text-container">
-                                      <div className="skeleton-text-sour"></div>
-                                      <div className="skeleton-text-sour"></div>
-                                    </div>
-                                  </div>
-
-                                  <div className="skeleton-card-sour">
-                                    <div className="skeleton-image-sour"></div>
-                                    <div className="skeleton-text-container">
-                                      <div className="skeleton-text-sour"></div>
-                                      <div className="skeleton-text-sour"></div>
-                                    </div>
+                          <div className="sources-section text-lg">
+                            {/* Show loading until all three are loaded */}
+                            {sourceLoading && index === array.length - 1 ? (
+                              <div className="loading-sour">
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
                                   </div>
                                 </div>
-                              ) : (
-                                <>
-                                  {item.iframeInfo && (
-                                    <div className="dataviz-section">
-                                      {item.iframeInfo && (
-                                        <div>
-                                          <span className="rlte-tite">
-                                            <strong> Dataviz References</strong>
-                                          </span>
-                                          <IframeComponent
-                                            key={index}
-                                            iframeInfo={item.iframeInfo}
-                                          />
-                                        </div>
-                                      )}
-                                    </div>
-                                  )}
 
-                                  {item.sources && renderSources(item.sources)}
-                                </>
-                              )}
-                            </div>
-                          )}
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
+                                  </div>
+                                </div>
+
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
+                                  </div>
+                                </div>
+
+                                <div className="skeleton-card-sour">
+                                  <div className="skeleton-image-sour"></div>
+                                  <div className="skeleton-text-container">
+                                    <div className="skeleton-text-sour"></div>
+                                    <div className="skeleton-text-sour"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <>
+                                {item.iframeInfo && (
+                                  <div className="dataviz-section">
+                                    {item.iframeInfo && (
+                                      <div>
+                                        <span className="rlte-tite">
+                                          <strong> Dataviz References</strong>
+                                        </span>
+                                        <IframeComponent
+                                          key={index}
+                                          iframeInfo={item.iframeInfo}
+                                        />
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
+
+                                {item.sources && renderSources(item.sources)}
+                              </>
+                            )}
+                          </div>
+                        )}
                       </p>
 
                       {index !== array.length - 1 && (
@@ -932,7 +946,7 @@ function TrendingQuestions({
         {error && <p className="error">{error}</p>}
 
         {loading ? (
-          <div className="loading" ref={loadingRef} >
+          <div className="loading" ref={loadingRef}>
             <div className="skeleton-card">
               <div className="skeleton-loader"></div>
               <div className="skeleton-item"></div>
