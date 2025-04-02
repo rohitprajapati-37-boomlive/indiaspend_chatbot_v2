@@ -4,7 +4,7 @@ import { MdOutlineRefresh, MdAutoDelete } from "react-icons/md";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import { GoArrowDown } from "react-icons/go";
 import { GoArrowUp } from "react-icons/go";
-import logo from "../assets/ask_indiaspend.png"
+// import logo from "../assets/ask_indiaspend.png"
 import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
 // import placeholder from '../assets/placeholder.jpeg';
@@ -93,6 +93,8 @@ function TrendingQuestions({
   const historySectionRef = useRef(null);
   const loadingRef = useRef(null);
   const triggeredRef = useRef(false);
+  const logo = "https://ask.indiaspend.com/ask_indiaspend.svg"
+
   // When the loading state changes, scroll into view if loading is true
   useEffect(() => {
     if (loading && loadingRef.current) {

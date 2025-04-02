@@ -26,7 +26,8 @@ import {
   GoXCircle,
 } from "react-icons/go";
 
-import logo from "../assets/ask_indiaspend.png"
+// import logo from "../assets/ask_indiaspend.svg";
+
 import { getRandomQuestions, cleanQuestion } from "../utils/utils";
 import "../styles/Sidebar.css";
 
@@ -52,7 +53,7 @@ function Sidebar({
 }) {
   // const [isCollapsed, setIsCollapsed] = useState(false);
   const [previousQuestions, setPreviousQuestions] = useState([]);
-
+  const logo = "https://ask.indiaspend.com/ask_indiaspend.svg"
   // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // ✅ Mobile menu toggle ke liye state
 
   useEffect(() => {
@@ -141,7 +142,7 @@ function Sidebar({
             className="logo-container"
             onClick={() => window.location.reload()}
           >
-            <img src={logo} alt="IndiaSpend Logo" className="logo" />
+            <img  src={logo} alt="IndiaSpend Logo" className="logo" />
             {isCollapsed && <h4>Ask IndiaSpend</h4>}
           </div>
         </div>

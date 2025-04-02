@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios"; // ✅ Import axios
-import logo from "../src/assets/ask_indiaspend.png"
+// import logo from "../src/assets/ask_indiaspend.png"
 import { GoSidebarExpand, GoSidebarCollapse, GoSun, GoMoon, GoTrash } from "react-icons/go";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 // import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
@@ -137,6 +137,7 @@ function App() {
   const [history, setHistory] = useState([]);
 
   const footerRef = useRef(null);
+  const logo = "https://ask.indiaspend.com/ask_indiaspend.svg"
 
 
 
@@ -261,7 +262,7 @@ function App() {
                       className="logo-container"
                       onClick={() => window.location.reload()}
                     >
-                      <img src={logo} alt="IndiaSpend Logo" className="logo" />
+                      <img src="https://ask.indiaspend.com/ask_indiaspend.png" alt="IndiaSpend Logo" className="logo" />
                       {isCollapsed && <h4>Ask IndiaSpend</h4>}
                     </div>
                   </div>
@@ -269,7 +270,7 @@ function App() {
                   <div
                     className="logo-container main"
                   >
-                    <img src={logo} alt="IndiaSpend Logo" className="logo" />
+                    <img src={logo} alt="IndiaSpend Logoeee" className="logo" />
                     <h4>Ask IndiaSpend</h4>
                   </div>
                 </div>
