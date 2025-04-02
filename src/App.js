@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios"; // ✅ Import axios
-import logo from "../src/assets/ask_indiaspend.svg";
+import logo from "../src/assets/ask_indiaspend.png"
 import { GoSidebarExpand, GoSidebarCollapse, GoSun, GoMoon, GoTrash } from "react-icons/go";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 // import { MdLightMode, MdOutlineDarkMode } from "react-icons/md";
@@ -187,6 +187,9 @@ function App() {
   }, []); // ✅ Run only once when component mounts
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      console.log("Enter is pressed");
+      e.preventDefault(); // Prevent default action
+      setQuestion(questionString);
       setIsSubmit(true);
     }
   };
@@ -299,7 +302,8 @@ function App() {
                 <div className="conents_c wc_item">
                   {!showFAQ && !showFeedback && (
                     <TrendingQuestions
-                      question={questionString}
+                      question={question}
+                      setQuestion={setQuestion}
                       isSubmit={isSubmit}
                       setIsSubmit={setIsSubmit}
                       setSubmitLoading={setSubmitLoading}

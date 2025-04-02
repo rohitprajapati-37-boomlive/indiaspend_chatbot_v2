@@ -26,7 +26,7 @@ import {
   GoXCircle,
 } from "react-icons/go";
 
-import logo from "../assets/ask_indiaspend.svg";
+import logo from "../assets/ask_indiaspend.png"
 import { getRandomQuestions, cleanQuestion } from "../utils/utils";
 import "../styles/Sidebar.css";
 

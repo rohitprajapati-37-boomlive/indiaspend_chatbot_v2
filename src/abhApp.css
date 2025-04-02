@@ -397,6 +397,9 @@ body {
   margin-top: 0.2rem;
   color: var(--primary);
 }
+.mainContainer .bodyContainer .workingContainer .thin_width .foot_c .disclaimer_div a {
+  color: var(--read-more-color);
+}
 
 .cler-hst-ic,
 .dark-mode-container {
@@ -539,8 +542,9 @@ body {
   .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .answer-preview p {
     font-size: 1rem;
   }
-  .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .answer-icon {
-    margin-left: -3px;
+  .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .answer-icon img {
+    width: 25px;
+    height: 25px;
   }
   .mainContainer .bodyContainer .workingContainer .thin_width .conents_c .answer-icon .chatbot_orb {
     width: 2.2rem;

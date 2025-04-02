@@ -653,6 +653,11 @@ body {
             margin: auto;
             margin-top: 0.2rem;
             color: var(--primary);
+
+            a{
+
+              color: var(--read-more-color);
+            }
           }
         }
 
@@ -912,7 +917,12 @@ body {
 
 
             .answer-icon {
-              margin-left: -3px;
+              // margin-left: -3px;
+
+              img {
+                width: 25px;
+                height: 25px;
+              }
 
               .chatbot_orb {
                 width: 2.2rem;

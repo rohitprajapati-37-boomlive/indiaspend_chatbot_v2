@@ -4,7 +4,7 @@ import { MdOutlineRefresh, MdAutoDelete } from "react-icons/md";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import { GoArrowDown } from "react-icons/go";
 import { GoArrowUp } from "react-icons/go";
-import logo from "../assets/ask_indiaspend.svg";
+import logo from "../assets/ask_indiaspend.png"
 import Footer from "./Footer";
 import "../styles/TrendingQuestions.css";
 // import placeholder from '../assets/placeholder.jpeg';
@@ -50,6 +50,7 @@ const questionIcons = [];
 
 function TrendingQuestions({
   question,
+  setQuestion,
   isSubmit,
   setIsSubmit,
   setSubmitLoading,
@@ -91,7 +92,7 @@ function TrendingQuestions({
   const [questionAsked, setQuestionAsked] = useState(false);
   const historySectionRef = useRef(null);
   const loadingRef = useRef(null);
-
+  const triggeredRef = useRef(false);
   // When the loading state changes, scroll into view if loading is true
   useEffect(() => {
     if (loading && loadingRef.current) {
@@ -104,10 +105,14 @@ function TrendingQuestions({
   useEffect(() => {
     console.log("QUESTION", question);
 
-    if (question.trim() !== "" && isSubmit) {
+    if (question.trim() !== "" && isSubmit && !triggeredRef.current) {
+
+      console.log("handleQuestionClick Function Trigger")
       handleQuestionClick(question);
       // ✅ Function Trigger
+      triggeredRef.current = true; // Prevent future triggers      
       setQuestionString("");
+      setQuestion("")
     }
   }, [question, isSubmit]); //
 
@@ -242,13 +247,13 @@ function TrendingQuestions({
       return url;
     }
   }
-  const handleQuestionClick = async (question) => {
+  const  handleQuestionClick = async (question) => {
     setQuestionAsked(true);
     setIsStartNewThread(false);
     setIsEducationCheck(false);
     setIsGenderCheck(false);
     setIsEarthCheck(false);
-    setIsSubmit(false);
+ 
     setSelectedQuestion(question);
     setLoading(true);
     setSubmitLoading(true);
@@ -269,7 +274,7 @@ function TrendingQuestions({
           question
         )}&thread_id=default`
       );
-
+      // setIsSubmit(false);
       eventSource.onmessage = async (event) => {
         // Ignore unwanted initial messages
         if (
@@ -288,7 +293,7 @@ function TrendingQuestions({
         if (event.data === "[end]") {
           // console.log("End of stream received.");
           eventSource.close(); // Close the stream
-
+          triggeredRef.current = false; // Prevent future triggers
           if (fetchedAnswer.includes("Sources:")) {
             // Find the index of "Sources:"
             const sourcesIndex = fetchedAnswer.indexOf("Sources:");
@@ -354,7 +359,7 @@ function TrendingQuestions({
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             console.log(Iframes);
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            const iframeTitles = await fetchMetaTitlesFromApi(Iframes);
+            const iframeTitles = fetchMetaTitlesFromApi(Iframes);
             console.log(
               "%%%%%%%%%%%%%%%%%%%%%%%%iframeTitles%%%%%%%%%%%%%%%%%%%%%%%%%"
             );
@@ -363,7 +368,7 @@ function TrendingQuestions({
               "%%%%%%%%%%%%%%%%%%%%%%%%%iframeTitles%%%%%%%%%%%%%%%%%%%%%%%%"
             );
 
-            const bestIframeIndex = getMostRelevantIframeIndex(
+            const bestIframeIndex = await getMostRelevantIframeIndex(
               question,
               iframeTitles
             );
@@ -487,8 +492,11 @@ function TrendingQuestions({
       console.log("fetched fours urls to be searched", urls, urls.length);
 
       // Convert the URLs array into a JSON string
-      const urlParam = JSON.stringify(urls);
-
+      const urlParam = await JSON.stringify(urls);
+      console.log("req url", `https://toolbox.boomlive.in/api_project/mediator_vue.php?get_metadata_from_arr=${encodeURIComponent(
+          urlParam
+        )}`);
+      
       // Make the API call
       const response = await fetch(
         `https://toolbox.boomlive.in/api_project/mediator_vue.php?get_metadata_from_arr=${encodeURIComponent(
@@ -497,6 +505,8 @@ function TrendingQuestions({
       );
 
       if (response.ok) {
+        console.log("yes response is okay");
+        
         // Parse and return the JSON response
         return await response.json();
       } else {
@@ -505,9 +515,7 @@ function TrendingQuestions({
     } catch (error) {
       console.error("Error fetching metadata from API:", error);
       throw error; // Re-throw the error for the calling code to handle
-    } finally {
-      setLoading(false)
-    }
+    } 
   };
 
   const handleRefresh = () => {
@@ -701,17 +709,17 @@ function TrendingQuestions({
                     </div>
                     <div className="answer-content">
                       <div className="answer-icon">
-                        {/* <img
+                        <img
                           src={logo}
                           alt="Ask IndiaSpend"
                           className="custom-icon"
-                        /> */}
-                        <Lottie
+                        />
+                        {/* <Lottie
                           className="chatbot_orb"
                           animationData={lottie}
                           loop={true}
                           size={1}
-                        />
+                        /> */}
                       </div>
                       <p
                         className="answer-preview"
