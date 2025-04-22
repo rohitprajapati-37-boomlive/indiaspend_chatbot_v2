@@ -8,6 +8,8 @@ const IframeComponent = ({ iframeInfo }) => {
     const fetchTitle = async () => {
       if (iframeInfo?.iframeSource) {
         const title = await fetchMetaTitle(iframeInfo.iframeSource);
+        console.log("Iframee Link:", iframeInfo.iframeLink);
+        
         setMetaTitle(title);
       }
     };

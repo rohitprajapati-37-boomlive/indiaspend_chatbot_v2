@@ -361,7 +361,7 @@ function TrendingQuestions({
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             console.log(Iframes);
             console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            const iframeTitles = fetchMetaTitlesFromApi(Iframes);
+            const iframeTitles =await  fetchMetaTitlesFromApi(Iframes);
             console.log(
               "%%%%%%%%%%%%%%%%%%%%%%%%iframeTitles%%%%%%%%%%%%%%%%%%%%%%%%%"
             );
@@ -374,6 +374,9 @@ function TrendingQuestions({
               question,
               iframeTitles
             );
+            console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+            console.log(bestIframeIndex)
+            console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 
             if (Iframes.length > 0) {
               iframeInfo = {

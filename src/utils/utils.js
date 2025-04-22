@@ -103,7 +103,7 @@ export const sortByPublishedTime = (articles) => {
   );
 };
 
-export const getMostRelevantIframeIndex = (question, iframeData) => {
+export const getMostRelevantIframeIndex = async (question, iframeData) => {
   // Ensure iframeData has a valid final_response array
   if (!iframeData || !iframeData.final_response || iframeData.final_response.length === 0) {
     return -1; // No valid iframes available
