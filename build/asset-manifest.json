@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.404ee501.css",
+    "main.js": "/static/js/main.ad570665.js",
+    "static/js/488.95c8656c.chunk.js": "/static/js/488.95c8656c.chunk.js",
+    "static/media/indiaspend_logo.svg": "/static/media/indiaspend_logo.cfd0a5145fae4001b99bd043731a8e85.svg",
+    "index.html": "/index.html",
+    "main.404ee501.css.map": "/static/css/main.404ee501.css.map",
+    "main.ad570665.js.map": "/static/js/main.ad570665.js.map",
+    "488.95c8656c.chunk.js.map": "/static/js/488.95c8656c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.404ee501.css",
+    "static/js/main.ad570665.js"
+  ]
+}

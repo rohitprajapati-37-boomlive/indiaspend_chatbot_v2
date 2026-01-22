@@ -2,7 +2,7 @@
 export const fetchIframes = async (urls) => {
   try {
     const response = await fetch(
-      "https://microservices-pink.vercel.app/api/scrapCharts",
+      "https://microservices.coolify.vps.boomlive.in/api/scrapCharts",
       {
         method: "POST",
         headers: {
